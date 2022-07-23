@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'ICCICOE',
   webDir: 'www',
   bundledWebRuntime: false,
-  server:{
+  server: {
     cleartext: true
   }
 };

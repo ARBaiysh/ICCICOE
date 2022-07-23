@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LoginEffect } from '../../store/effects/login.effect';
 import { BackendErrorMessagesPageModule } from '../backend-error-messages/backend-error-messages.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -27,9 +28,8 @@ import { BackendErrorMessagesPageModule } from '../backend-error-messages/backen
     ]),
     ReactiveFormsModule,
     BackendErrorMessagesPageModule,
-
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
 })
 export class LoginPageModule {
 }

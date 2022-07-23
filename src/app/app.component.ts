@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { App } from '@capacitor/app';
-import { AlertController, IonRouterOutlet, Platform } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
+
 import { Location } from '@angular/common';
 
 
@@ -13,12 +14,16 @@ export class AppComponent {
   @ViewChild(IonRouterOutlet, {static: true})
   routerOutlet: IonRouterOutlet;
 
-  constructor( private platform: Platform, private alertController: AlertController, private location: Location ) {
-    this.platform.ready().then(() => {
+  constructor( private platform: Platform,
+               private alertController: AlertController,
+               private location: Location,
+  ) {
+
+    platform.ready().then(() => {
       this.backButtonEvent();
     });
-
   }
+
 
   private backButtonEvent() {
     this.platform.backButton.subscribeWithPriority(10, () => {
@@ -29,7 +34,6 @@ export class AppComponent {
       }
     });
   }
-
 
   private async backButtonAlert() {
     const alert = await this.alertController.create({
