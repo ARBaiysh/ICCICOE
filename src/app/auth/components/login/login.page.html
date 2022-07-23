@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Login with Background</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <div class="is-hero">
+    <div class="is-image-container ion-padding-top">
+      <img src="assets/imgs/logo-dark.png"/>
+    </div>
+  </div>
+
+  <form [formGroup]="form">
+    <ion-list class="ion-padding is-list-transparent">
+      <ion-item>
+        <ion-input type="text" placeholder="Login" formControlName="username"></ion-input>
+      </ion-item>
+
+      <ion-item class="is-password-field">
+        <ion-input [type]="passwordType || 'password'" placeholder="Password" formControlName="password"></ion-input>
+        <ion-button fill="clear" size="default" slot="end" (click)="togglePasswordType()">
+          <ion-icon [name]="(passwordType === 'text') ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+      <ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmitting$ | async)" (click)="onSubmit()">
+        <ion-label>Login to Account</ion-label>
+        <ng-container *ngIf="isSubmitting$|async">
+          <span>Please wait...</span>
+        </ng-container>
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+      <ion-item color="secondary" button detail="true">
+        <ion-label>Sign Up with E-mail</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding-horizontal">
+      <p class="is-login-element-dark-contrast">
+        Forget password? <a routerLink="/loginBackground">Restore</a>
+      </p>
+    </div>
+
+    <ng-container *ngIf="isErrors$ | async">
+      <app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>
+    </ng-container>
+  </form>
+</ion-content>

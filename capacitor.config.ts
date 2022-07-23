@@ -4,7 +4,10 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'ICCICOE',
   webDir: 'www',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  server:{
+    cleartext: true
+  }
 };
 
 export default config;
