@@ -6,7 +6,6 @@ import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '..
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequestInterface } from '../../types/loginRequestInterface';
 import { loginAction } from '../../store/actions/login.action';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',

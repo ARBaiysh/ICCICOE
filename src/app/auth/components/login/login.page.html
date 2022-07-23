@@ -43,12 +43,6 @@
       </ion-item>
     </ion-list>
 
-    <div class="ion-padding-horizontal">
-      <p class="is-login-element-dark-contrast">
-        Forget password? <a routerLink="/loginBackground">Restore</a>
-      </p>
-    </div>
-
     <ng-container *ngIf="isErrors$ | async">
       <app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>
     </ng-container>
