@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendErrorsInterface } from '../../types/backendErrorsInterface';
+import { BackendErrorsInterface } from '../auth/types/backendErrorsInterface';
 import { select, Store } from '@ngrx/store';
-import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '../../store/selectors';
+import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '../auth/store/selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginRequestInterface } from '../../types/loginRequestInterface';
-import { loginAction } from '../../store/actions/login.action';
+import { LoginRequestInterface } from '../auth/types/loginRequestInterface';
+import { loginAction } from '../auth/store/actions/login.action';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,6 @@ export class LoginPage implements OnInit {
   backendErrors$: Observable<BackendErrorsInterface | null>;
   isErrors$: Observable<boolean>;
   passwordType: string;
-
 
   constructor( private fb: FormBuilder, private store: Store ) {
 

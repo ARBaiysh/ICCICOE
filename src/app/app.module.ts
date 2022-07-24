@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,9 +14,9 @@ import { PersistenceService } from './auth/services/persistance.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AuthInterceptor } from './auth/services/authinterceptor.service';
-import { HomePageModule } from './home/home.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-
+import { LoginPageModule } from './login/login.module';
+import { SidenavPageModule } from './sidenav/sidenav.module';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       maxAge: 25,
       logOnly: environment.production
     }),
-    HomePageModule
+    LoginPageModule,
+    SidenavPageModule
 
   ],
   providers: [

@@ -10,7 +10,6 @@ import { AuthService } from '../../services/auth.service';
 import { PersistenceService } from '../../services/persistance.service';
 
 
-
 @Injectable()
 export class LoginEffect {
   login$ = createEffect(() =>
@@ -31,7 +30,7 @@ export class LoginEffect {
       this.actions$.pipe(
         ofType(loginSuccessAction),
         tap(() => {
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('/nav/about').then(r => console.log(r));
         })
       ),
     {dispatch: false}
