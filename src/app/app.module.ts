@@ -35,7 +35,6 @@ import { SidenavPageModule } from './sidenav/sidenav.module';
       logOnly: environment.production
     }),
     LoginPageModule,
-    SidenavPageModule
 
   ],
   providers: [

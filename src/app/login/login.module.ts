@@ -12,6 +12,7 @@ import { reducers } from '../auth/store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffect } from '../auth/store/effects/login.effect';
 import { BackendErrorMessagesPageModule } from '../auth/components/backend-error-messages/backend-error-messages.module';
+import { SidenavPageModule } from '../sidenav/sidenav.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { BackendErrorMessagesPageModule } from '../auth/components/backend-error
     ]),
     ReactiveFormsModule,
     BackendErrorMessagesPageModule,
+    SidenavPageModule
   ],
   declarations: [LoginPage],
 })

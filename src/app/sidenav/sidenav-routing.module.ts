@@ -27,11 +27,6 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: '',
-    redirectTo: '/nav/about',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({
