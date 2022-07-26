@@ -16,6 +16,7 @@ export class PersistenceService {
         }
     }
 
+
     async get(key: string): Promise<any> {
         try {
             return await this.storage.get(key);

@@ -3,6 +3,7 @@ import { App } from '@capacitor/app';
 import { AlertController, IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 
 import { Location } from '@angular/common';
+import {getCurrentUserAction} from './users/store/actions/getCurrentUser.action';
 
 
 @Component({
@@ -18,7 +19,6 @@ export class AppComponent {
                private alertController: AlertController,
                private location: Location,
   ) {
-
     platform.ready().then(() => {
       this.backButtonEvent();
     });

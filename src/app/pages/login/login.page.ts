@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendErrorsInterface } from '../auth/types/backendErrorsInterface';
+import { BackendErrorsInterface } from '../../auth/types/backendErrorsInterface';
 import { select, Store } from '@ngrx/store';
-import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '../auth/store/selectors';
+import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '../../auth/store/selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginRequestInterface } from '../auth/types/loginRequestInterface';
-import { loginAction } from '../auth/store/actions/login.action';
+import { LoginRequestInterface } from '../../auth/types/loginRequestInterface';
+import { loginAction } from '../../auth/store/actions/login.action';
 
 @Component({
   selector: 'app-login',

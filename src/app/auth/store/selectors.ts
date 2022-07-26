@@ -1,4 +1,4 @@
-import { AppStateInterface } from '../types/appState.interface';
+import { AppStateInterface } from '../../appState.interface';
 import { AuthStateInterface } from '../types/authState.interface';
 import { createSelector } from '@ngrx/store';
 
