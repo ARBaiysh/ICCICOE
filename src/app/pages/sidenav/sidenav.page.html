@@ -5,7 +5,7 @@
 				<ion-list>
 					<ion-item>
 						<ion-avatar slot="start">
-							<img src="assets/imgs/profile.png">
+							<img src="assets/imgs/profile.png" alt="">
 						</ion-avatar>
 						<ion-label>
 							<h2>{{(currentUser$|async).username}} {{(currentUser$|async).lastName}}</h2>
@@ -19,24 +19,13 @@
 		<ion-content>
 			<ion-list>
 				
-				<ion-menu-toggle autoHide="false">
-					<ion-item routerDirection="root" [routerLink]="['about']">
-						About
-						<ion-icon slot="start" [md]="'person-circle' + '-sharp'"></ion-icon>
-					</ion-item>
-				</ion-menu-toggle>
-				
-				<ion-menu-toggle autoHide="false">
-					<ion-item routerDirection="root" [routerLink]="['blog']">
-						Blog
-						<ion-icon slot="start" [md]="'albums' + '-sharp'"></ion-icon>
-					</ion-item>
-				</ion-menu-toggle>
-				
-				<ion-menu-toggle autoHide="false">
-					<ion-item routerDirection="root" [routerLink]="['contact']">
-						Contact
-						<ion-icon slot="start" [md]="'call' + '-sharp'"></ion-icon>
+				<ion-menu-toggle autoHide="false" *ngFor="let nav of navs">
+					<ion-item
+							routerDirection="root"
+							[routerLink]="nav.link"
+							[class.active-menu]="active === nav.link">
+						{{nav.name}}
+						<ion-icon slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
 					</ion-item>
 				</ion-menu-toggle>
 				
