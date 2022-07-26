@@ -1,8 +1,12 @@
-import {CurrentUserInterface} from './currentUser.interface';
+import { UserInterface } from './userInterface';
 
 
 export interface UserStateInterface {
-  isSubmitting: boolean;
-  isLoggedIn: boolean | null;
-  currentUser: CurrentUserInterface| null;
+  isSubmittingCurrentUser: boolean;
+  isLoggedInCurrentUser: boolean | null;
+  currentUser: UserInterface | null;
+
+  isSubmittingAllUsers: boolean;
+  isLoggedInAllUsers: boolean | null;
+  usersList: UserInterface[] | null;
 }

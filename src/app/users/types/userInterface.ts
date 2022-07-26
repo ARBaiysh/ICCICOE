@@ -1,7 +1,7 @@
 import {ERoleInterface} from './eRoleInterface';
 import {Base1cInterface} from './base1cInterface';
 
-export interface CurrentUserInterface {
+export interface UserInterface {
     id: number;
     username: string;
     firstName: string;

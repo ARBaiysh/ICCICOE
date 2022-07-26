@@ -9,6 +9,10 @@ const routes: Routes = [
     component: SidenavPage,
     children: [
       {
+        path: 'users-list',
+        loadChildren: () => import('../users-list/users-list.module').then( m => m.UsersListPageModule)
+      },
+      {
         path: 'about',
         loadChildren: () => import('../about/about.module').then(m => m.AboutPageModule)
       },

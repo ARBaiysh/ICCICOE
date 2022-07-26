@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Users</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon name="menu" size="large"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="updateUsers()">
+        <ion-icon name="refresh" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isSubmittingAllUsersUser$|async">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="isLoggedInAllUsers$|async" lines="none" class="is-list-colored">
+    <div *ngFor="let item of usersList$|async; let i = index">
+      <ion-item [ngClass]="item.username">
+        <ion-thumbnail slot="start" class="is-icon-thumbnail">
+          <img src="assets/imgs/profile.png" alt="">
+        </ion-thumbnail>
+        <ion-label>
+          <h2 (click)="itemTapped(i)">{{item.lastName}}
+            <ion-icon name="arrow-down" *ngIf="!isShown[i]"></ion-icon>
+            <ion-icon name="arrow-up" *ngIf="isShown[i]"></ion-icon>
+          </h2>
+          <p>{{item.username}} {{item.firstName}}</p>
+        </ion-label>
+
+        <ion-label>
+          <p>{{item.resName}}</p>
+        </ion-label>
+        <div slot="end" class="is-list-colored-button-group">
+          <h3>{{item.base1cDTO.length}}</h3>
+        </div>
+      </ion-item>
+      <div class="ion-padding-horizontal">
+        <ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
+          <ion-row>
+            <ion-col>
+              Transaction number
+            </ion-col>
+            <ion-col class="ion-text-right">
+              {{item.firstName}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Profile ID
+            </ion-col>
+            <ion-col class="ion-text-right">
+              {{item.id}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              E-mail
+            </ion-col>
+            <ion-col class="is-color-primary ion-text-right">
+              {{item.resName}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button fill="outline" color="is-mute-normal">Cancel</ion-button>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </ion-list>
+
+</ion-content>

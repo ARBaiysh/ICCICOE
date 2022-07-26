@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {CurrentUserInterface} from '../types/currentUser.interface';
+import {UserInterface} from '../types/userInterface';
 
 
 @Injectable({
@@ -12,8 +12,13 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    getCurrentUser(): Observable<CurrentUserInterface> {
+    getCurrentUser(): Observable<UserInterface> {
         const url = environment.apiUrl + '/user/';
-        return this.http.get<CurrentUserInterface>(url);
+        return this.http.get<UserInterface>(url);
     }
+
+  getAllUsers(): Observable<UserInterface[]> {
+    const url = environment.apiUrl + '/user/all';
+    return this.http.get<UserInterface[]>(url);
+  }
 }
