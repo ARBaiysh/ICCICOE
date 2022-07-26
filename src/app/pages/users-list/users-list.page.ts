@@ -15,6 +15,7 @@ export class UsersListPage implements OnInit {
   isSubmittingAllUsersUser$: Observable<boolean>;
   isLoggedInAllUsers$: Observable<boolean | null>;
   usersList$: Observable<UserInterface[] | null>;
+  searchTerm: string;
 
   public isShown = [];
 
@@ -26,12 +27,13 @@ export class UsersListPage implements OnInit {
     this.initializeValues();
   }
 
-  updateUsers(): void {
-    this.store.dispatch(getAllUsersAction());
-  }
-
   itemTapped( index ) {
     this.isShown[index] = !this.isShown[index];
+  }
+
+  doRefresh( $event: any ) {
+    this.store.dispatch(getAllUsersAction());
+    $event.target.complete();
   }
 
   private initializeValues() {
