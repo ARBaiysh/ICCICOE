@@ -1,33 +1,46 @@
-import { AppStateInterface } from '../../appState.interface';
-import { AuthStateInterface } from '../types/authState.interface';
-import { createSelector } from '@ngrx/store';
+import {AppStateInterface} from '../../appState.interface';
+import {AuthStateInterface} from '../types/authState.interface';
+import {createSelector} from '@ngrx/store';
 
 
 export const authFeatureSelector = (state: AppStateInterface): AuthStateInterface => state.auth;
 
-export const isSubmittingSelector = createSelector(
-  authFeatureSelector,
-  (authState: AuthStateInterface) => authState.isSubmitting
+// login
+export const isSubmittingLoginSelector = createSelector(authFeatureSelector,
+    (authState: AuthStateInterface) => authState.isSubmittingLogin
 );
 
-export const backendErrorsSelector = createSelector(
-  authFeatureSelector,
-  (authState: AuthStateInterface) => authState.backendErrors
+export const isLoggedInLoginSelector = createSelector(authFeatureSelector,
+    (authState: AuthStateInterface) => authState.isLoggedInLogin
 );
 
-export const isLoggedInSelector = createSelector(
-  authFeatureSelector,
-  (authState: AuthStateInterface) => authState.isLoggedIn
+export const responseLoginSelector = createSelector(authFeatureSelector,
+    (authState: AuthStateInterface) => authState.responseLogin
+);
+
+export const backendErrorsLoginSelector = createSelector(authFeatureSelector,
+    (authState: AuthStateInterface) => authState.backendErrorsLogin
 );
 
 
-export const isErrorSelector = createSelector(
-  authFeatureSelector,
-  (authState: AuthStateInterface) => authState.isErrors
+//register
+export const isSubmittingRegisterSelector = createSelector(
+    authFeatureSelector,
+    (authState: AuthStateInterface) => authState.isSubmittingRegister
 );
 
-export const loginResponseSelector = createSelector(
-  authFeatureSelector,
-  (authState: AuthStateInterface) => authState.response
+export const isLoggedInRegisterSelector = createSelector(
+    authFeatureSelector,
+    (authState: AuthStateInterface) => authState.isLoggedInRegister
+);
+
+export const responseRegisterSelector = createSelector(
+    authFeatureSelector,
+    (authState: AuthStateInterface) => authState.responseRegister
+);
+
+export const backendErrorsRegisterSelector = createSelector(
+    authFeatureSelector,
+    (authState: AuthStateInterface) => authState.backendErrorsRegister
 );
 

@@ -3,6 +3,9 @@ export enum ActionTypes {
   loginSuccess = '[Auth] Login success',
   loginFailure = '[Auth] Login failure',
 
-  logout = '[Auth] Logout'
+  logout = '[Auth] Logout',
 
-}
+  register = '[Auth] Register',
+  registerSuccess = '[Auth] Register success',
+  registerFailure = '[Auth] Register failure'
+};

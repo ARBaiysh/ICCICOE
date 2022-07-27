@@ -13,8 +13,7 @@ import {Store} from '@ngrx/store';
 
 @Injectable()
 export class LoginEffect {
-    login$ = createEffect(() =>
-        this.actions$.pipe(
+    login$ = createEffect(() => this.actions$.pipe(
             ofType(loginAction),
             switchMap(({request}) => this.authService.login(request).pipe(
                 map((response: LoginResponseInterface) => {

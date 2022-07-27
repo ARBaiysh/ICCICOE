@@ -1,9 +1,80 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="end">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Sign Up</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+	<form [formGroup]="form">
+		<ion-list class="ion-padding-bottom">
+			<ion-item>
+				<ion-label color="primary" position="stacked">Name</ion-label>
+				<ion-input formControlName="username" type="text" placeholder="Name"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label color="primary" position="stacked">Email</ion-label>
+				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label color="primary" position="stacked">First name</ion-label>
+				<ion-input formControlName="firstName"type="text" placeholder="First name"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label color="primary" position="stacked">Last name</ion-label>
+				<ion-input formControlName="lastName"type="text" placeholder="Last name"></ion-input>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label color="primary" position="stacked">Position</ion-label>
+				<ion-select formControlName="position" interface="popover" placeholder="Position">
+					<ion-select-option value="Dir">Dir</ion-select-option>
+					<ion-select-option value="Nachalnak">Nachalnak</ion-select-option>
+					<ion-select-option value="Injener">Injener</ion-select-option>
+					<ion-select-option value="Inspektor OE">Inspektor OE</ion-select-option>
+					<ion-select-option value="Inspektor RES">Inspektor RES</ion-select-option>
+					<ion-select-option value="Admin">Admin</ion-select-option>
+				</ion-select>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label color="primary" position="stacked">RES name</ion-label>
+				<ion-select  formControlName="resName" interface="popover" placeholder="RES name">
+					<ion-select-option value="OE">OE</ion-select-option>
+					<ion-select-option value="Osh sbyt">Osh sbyt</ion-select-option>
+					<ion-select-option value="Karasuu RES">Karasuu RES</ion-select-option>
+					<ion-select-option value="Nookat RES">Hookat RES</ion-select-option>
+					<ion-select-option value="Uzget RES">Uzget RES</ion-select-option>
+					<ion-select-option value="Arava RES">Arava RES</ion-select-option>
+					<ion-select-option value="Alay RES">Alay RES</ion-select-option>
+					<ion-select-option value="Karakulja RES">Karakulja RES</ion-select-option>
+				</ion-select>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label color="primary" position="stacked">Password</ion-label>
+				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label color="primary" position="stacked">Repeat Password</ion-label>
+				<ion-input formControlName="confirmPassword" type="password" placeholder="Repeat Password"></ion-input>
+			</ion-item>
+		</ion-list>
+		
+		<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+			<ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmitting$ | async)" (click)="onSubmit()">
+				<ion-label>Sign Up</ion-label>
+				<ng-container *ngIf="isSubmitting$|async">
+					<span>Please wait...</span>
+				</ng-container>
+			</ion-item>
+		</ion-list>
+		
+		
+		<ng-container *ngIf="backendErrors$ | async">
+			<app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>
+		</ng-container>
+	</form>
 </ion-content>

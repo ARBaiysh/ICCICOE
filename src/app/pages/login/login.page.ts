@@ -1,54 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BackendErrorsInterface } from '../../auth/types/backendErrorsInterface';
-import { select, Store } from '@ngrx/store';
-import { backendErrorsSelector, isErrorSelector, isSubmittingSelector } from '../../auth/store/selectors';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginRequestInterface } from '../../auth/types/loginRequestInterface';
-import { loginAction } from '../../auth/store/actions/login.action';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BackendErrorsInterface} from '../../auth/types/backendErrorsInterface';
+import {select, Store} from '@ngrx/store';
+import {backendErrorsLoginSelector, isSubmittingLoginSelector} from '../../auth/store/selectors';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LoginRequestInterface} from '../../auth/types/loginRequestInterface';
+import {loginAction} from '../../auth/store/actions/login.action';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  form: FormGroup;
-  isSubmitting$: Observable<boolean>;
-  backendErrors$: Observable<BackendErrorsInterface | null>;
-  isErrors$: Observable<boolean>;
-  passwordType: string;
+    form: FormGroup;
 
-  constructor( private fb: FormBuilder, private store: Store ) {
+    isSubmitting$: Observable<boolean>;
+    backendErrors$: Observable<BackendErrorsInterface | null>;
 
-  }
+    passwordType: string;
 
-  ngOnInit() {
-    this.initializeForm();
-    this.initializeValues();
+    constructor(private fb: FormBuilder, private store: Store) {
 
-  }
+    }
 
-  initializeValues(): void {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
-    this.backendErrors$ = this.store.pipe(select(backendErrorsSelector));
-    this.isErrors$ = this.store.pipe(select(isErrorSelector));
-  }
+    ngOnInit() {
+        this.initializeForm();
+        this.initializeValues();
 
-  initializeForm(): void {
-    this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+    }
 
-  onSubmit(): void {
-    const request: LoginRequestInterface = this.form.value;
-    this.store.dispatch(loginAction({request}));
-  }
+    initializeValues(): void {
+        this.isSubmitting$ = this.store.pipe(select(isSubmittingLoginSelector));
+        this.backendErrors$ = this.store.pipe(select(backendErrorsLoginSelector));
+    }
 
-  togglePasswordType() {
-    this.passwordType = this.passwordType || 'password';
-    this.passwordType = (this.passwordType === 'password') ? 'text' : 'password';
-  }
+    initializeForm(): void {
+        this.form = this.fb.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
+
+    onSubmit(): void {
+        const request: LoginRequestInterface = this.form.value;
+        this.store.dispatch(loginAction({request}));
+    }
+
+    togglePasswordType() {
+        this.passwordType = this.passwordType || 'password';
+        this.passwordType = (this.passwordType === 'password') ? 'text' : 'password';
+    }
 }

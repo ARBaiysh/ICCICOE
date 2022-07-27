@@ -35,7 +35,7 @@
       </ion-item>
     </ion-list>
 
-    <ng-container *ngIf="isErrors$ | async">
+    <ng-container *ngIf="backendErrors$ | async">
       <app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>
     </ng-container>
   </form>

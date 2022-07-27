@@ -12,16 +12,14 @@ import {getCurrentUserFailureAction} from '../../../users/store/actions/getCurre
 
 @Injectable()
 export class LogoutEffect {
-    logout$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(logoutAction),
-                tap(() => {
-                    this.persistenceService.removeToken('accessToken');
-                    this.store.dispatch(getCurrentUserFailureAction());
-                    this.router.navigateByUrl('');
-                })
-            ),
+    logout$ = createEffect(() => this.actions$.pipe(
+            ofType(logoutAction),
+            tap(() => {
+                this.persistenceService.removeToken('accessToken');
+                this.store.dispatch(getCurrentUserFailureAction());
+                this.router.navigateByUrl('');
+            })
+        ),
         {dispatch: false}
     );
 

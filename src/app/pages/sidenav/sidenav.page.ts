@@ -63,6 +63,4 @@ export class SidenavPage implements OnInit {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
 
   }
-
-
 }

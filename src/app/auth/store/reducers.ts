@@ -2,14 +2,19 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {AuthStateInterface} from '../types/authState.interface';
 import {loginAction, loginFailureAction, loginSuccessAction} from './actions/login.action';
 import {logoutAction} from './actions/logout.action';
+import {registerAction, registerFailureAction, registerSuccessAction} from './actions/register.action';
 
 
 const initialState: AuthStateInterface = {
-    isSubmitting: false,
-    isLoggedIn: null,
-    backendErrors: null,
-    isErrors: false,
-    response: null
+    isSubmittingLogin: false,
+    isLoggedInLogin: null,
+    responseLogin: null,
+    backendErrorsLogin: null,
+
+    isSubmittingRegister: false,
+    isLoggedInRegister: null,
+    responseRegister: null,
+    backendErrorsRegister: null,
 };
 
 const authReducer = createReducer(
@@ -17,35 +22,60 @@ const authReducer = createReducer(
 //login-----------------------------------------------------
     on(loginAction, (state): AuthStateInterface => ({
             ...state,
-            isSubmitting: true,
-            backendErrors: null,
-            isErrors: false
+            isSubmittingLogin: true,
+            isLoggedInLogin: null,
+            responseLogin: null,
+            backendErrorsLogin: null,
         })
     ),
     on(loginSuccessAction,
         (state, action): AuthStateInterface => ({
             ...state,
-            isSubmitting: false,
-            isLoggedIn: true,
-            backendErrors: null,
-            isErrors: false,
-            response: action.response
+            isSubmittingLogin: false,
+            isLoggedInLogin: true,
+            responseLogin: action.response,
+            backendErrorsLogin: null,
         })
     ),
     on(loginFailureAction, (state, action): AuthStateInterface => ({
             ...state,
-            isErrors: true,
-            isSubmitting: false,
-            backendErrors: action.backendError,
-            isLoggedIn: false,
+            isSubmittingLogin: false,
+            isLoggedInLogin: false,
+            responseLogin: null,
+            backendErrorsLogin: action.backendError,
         })
     ),
+    // logout
     on(logoutAction, (state): AuthStateInterface => ({
             ...state,
             ...initialState,
-            isLoggedIn: false
         })
-    )
+    ),
+    // register
+    on(registerAction, (state): AuthStateInterface => ({
+            ...state,
+            isSubmittingRegister: true,
+            isLoggedInRegister: null,
+            responseRegister: null,
+            backendErrorsRegister: null,
+        })
+    ),
+    on(registerSuccessAction, (state, action): AuthStateInterface => ({
+            ...state,
+            isSubmittingRegister: false,
+            isLoggedInRegister: true,
+            responseRegister: action.response,
+            backendErrorsRegister: null,
+        })
+    ),
+    on(registerFailureAction, (state, action): AuthStateInterface => ({
+            ...state,
+            isSubmittingRegister: false,
+            isLoggedInRegister: false,
+            responseRegister: null,
+            backendErrorsRegister: action.backendError,
+        })
+    ),
 );
 
 export function reducers(state: AuthStateInterface, action: Action) {

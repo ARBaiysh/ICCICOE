@@ -5,6 +5,7 @@ import {reducers} from './store/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {LoginEffect} from './store/effects/login.effect';
 import {LogoutEffect} from './store/effects/logout.effect';
+import {RegisterEffect} from './store/effects/regiser.effect';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {LogoutEffect} from './store/effects/logout.effect';
         StoreModule.forFeature('auth', reducers),
         EffectsModule.forFeature([
             LoginEffect,
-            LogoutEffect
+            LogoutEffect,
+            RegisterEffect
         ]),
     ],
     declarations: [],

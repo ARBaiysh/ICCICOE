@@ -1,15 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {select, Store} from '@ngrx/store';
+import {RegisterRequestInterface} from '../../auth/types/registerRequest.interface';
+import {registerAction} from '../../auth/store/actions/register.action';
+import {Observable} from 'rxjs';
+import {BackendErrorsInterface} from '../../auth/types/backendErrorsInterface';
+import {backendErrorsRegisterSelector, isSubmittingRegisterSelector} from '../../auth/store/selectors';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+    selector: 'app-register',
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+    form: FormGroup;
 
-  constructor() { }
+    isSubmitting$: Observable<boolean>;
+    backendErrors$: Observable<BackendErrorsInterface | null>;
 
-  ngOnInit() {
-  }
+    constructor(private fb: FormBuilder, private store: Store) {
+    }
 
+    ngOnInit() {
+        this.initializeForm();
+        this.initializeValues();
+    }
+
+    initializeForm(): void {
+        this.form = this.fb.group({
+            email: ['', Validators.compose([Validators.required, Validators.email])],
+            username: ['', Validators.compose([Validators.required])],
+            firstName: ['', Validators.compose([Validators.required])],
+            lastName: ['', Validators.compose([Validators.required])],
+            position: ['', Validators.compose([Validators.required])],
+            resName: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(100)])],
+            confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(100)])]
+        });
+    }
+
+    initializeValues(): void {
+        this.isSubmitting$ = this.store.pipe(select(isSubmittingRegisterSelector));
+        this.backendErrors$ = this.store.pipe(select(backendErrorsRegisterSelector));
+    }
+
+    onSubmit(): void {
+        const request: RegisterRequestInterface = this.form.value;
+        this.store.dispatch(registerAction({request}));
+    }
 }
