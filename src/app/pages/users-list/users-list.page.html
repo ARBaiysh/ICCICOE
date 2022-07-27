@@ -1,76 +1,81 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Users</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-icon name="menu" size="large"></ion-icon>
-      </ion-menu-toggle>
-    </ion-buttons>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>Users</ion-title>
+		<ion-buttons slot="start">
+			<ion-menu-toggle>
+				<ion-icon name="menu" size="large"></ion-icon>
+			</ion-menu-toggle>
+		</ion-buttons>
+		<ion-buttons slot="end">
+			<ion-button [routerLink]="['/register']">
+				<ion-icon size="large" name="person-add-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="isSubmittingAllUsersUser$|async">
-    <ion-progress-bar type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
-  </div>
-
-  <ion-searchbar placeholder="Search..." [(ngModel)]="searchTerm" show-cancel-button="focus"></ion-searchbar>
-
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content color="primary"></ion-refresher-content>
-  </ion-refresher>
-
-
-  <ion-list *ngIf="isLoggedInAllUsers$|async " lines="none" class="is-list-colored">
-    <div *ngFor="let item of (usersList$|async) | filter:searchTerm let i = index">
-      <ion-item [ngClass]="item.username">
-        <ion-thumbnail slot="start" class="is-icon-thumbnail">
-          <img src="assets/imgs/profile.png" alt="">
-        </ion-thumbnail>
-        <ion-label>
-          <h2 (click)="itemTapped(i)">{{item.lastName}}
-            <ion-icon name="arrow-down" *ngIf="!isShown[i]"></ion-icon>
-            <ion-icon name="arrow-up" *ngIf="isShown[i]"></ion-icon>
-          </h2>
-          <p>{{item.username}} {{item.firstName}}</p>
-        </ion-label>
-
-        <ion-label>
-          <p>{{item.resName}}</p>
-        </ion-label>
-        <div slot="end" class="is-list-colored-button-group">
-          <h3 class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{item.base1cDTO.length}}</h3>
-        </div>
-      </ion-item>
-      <div (click)="itemTapped(i)" class="ion-padding-horizontal">
-        <ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
-          <ion-row>
-            <ion-col>
-              Profile ID
-            </ion-col>
-            <ion-col class="is-color-primary ion-text-right">
-              {{item.id}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              Position
-            </ion-col>
-            <ion-col class="is-color-primary ion-text-right">
-              {{item.position}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <div *ngFor="let base of item.base1cDTO; let i = index">
-              <ion-button  size="Small" fill="outline" shape="round">{{base.name}}</ion-button>
-            </div>
-          </ion-row>
-          <ion-row>
-            <ion-button fill="outline" color="is-mute-normal">Cancel</ion-button>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-  </ion-list>
+	<div *ngIf="isSubmittingAllUsersUser$|async">
+		<ion-progress-bar type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
+	</div>
+	
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content color="primary"></ion-refresher-content>
+	</ion-refresher>
+	
+	
+	<ion-list *ngIf="isLoggedInAllUsers$|async " lines="none" class="is-list-colored">
+		<ion-searchbar placeholder="Search..." [(ngModel)]="searchTerm" show-cancel-button="focus"></ion-searchbar>
+		
+		<div *ngFor="let item of (usersList$|async) | filter:searchTerm let i = index">
+			<ion-item [ngClass]="item.username">
+				<ion-thumbnail slot="start" class="is-icon-thumbnail">
+					<img src="assets/imgs/profile.png" alt="">
+				</ion-thumbnail>
+				<ion-label>
+					<h2 (click)="itemTapped(i)">{{item.lastName}}
+						<ion-icon name="arrow-down" *ngIf="!isShown[i]"></ion-icon>
+						<ion-icon name="arrow-up" *ngIf="isShown[i]"></ion-icon>
+					</h2>
+					<p>{{item.username}} {{item.firstName}}</p>
+				</ion-label>
+				
+				<ion-label>
+					<p>{{item.resName}}</p>
+				</ion-label>
+				<div slot="end" class="is-list-colored-button-group">
+					<h3 class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{item.base1cDTO.length}}</h3>
+				</div>
+			</ion-item>
+			<div (click)="itemTapped(i)" class="ion-padding-horizontal">
+				<ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
+					<ion-row>
+						<ion-col>
+							Profile ID
+						</ion-col>
+						<ion-col class="is-color-primary ion-text-right">
+							{{item.id}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							Position
+						</ion-col>
+						<ion-col class="is-color-primary ion-text-right">
+							{{item.position}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<div *ngFor="let base of item.base1cDTO let i = index">
+							<ion-button size="Small" fill="outline" shape="round">{{base.name}}</ion-button>
+						</div>
+					</ion-row>
+					<ion-row>
+						<ion-button fill="outline" color="is-mute-normal">Cancel</ion-button>
+					</ion-row>
+				</ion-grid>
+			</div>
+		</div>
+	</ion-list>
 
 </ion-content>
