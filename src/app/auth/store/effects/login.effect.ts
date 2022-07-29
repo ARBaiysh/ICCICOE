@@ -37,7 +37,6 @@ export class LoginEffect {
     );
 
     constructor(
-        private store: Store,
         private actions$: Actions,
         private authService: AuthService,
         private persistenceService: PersistenceService,

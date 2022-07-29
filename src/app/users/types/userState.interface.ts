@@ -1,4 +1,5 @@
 import { UserInterface } from './userInterface';
+import { BackendErrorsInterface } from '../../auth/types/backendErrorsInterface';
 
 
 export interface UserStateInterface {
@@ -9,4 +10,9 @@ export interface UserStateInterface {
   isSubmittingAllUsers: boolean;
   isLoggedInAllUsers: boolean | null;
   usersList: UserInterface[] | null;
+
+  isSubmittingUpdateUser: boolean;
+  isLoggedInUpdate: boolean | null;
+  usersUpdate: UserInterface | null;
+  updateBackendErrorsResponse: BackendErrorsInterface | null;
 }

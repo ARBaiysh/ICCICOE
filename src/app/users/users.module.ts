@@ -5,6 +5,7 @@ import { reducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { GetAllUsersEffect } from './store/effects/getAllUsers.effect';
+import { UpdateUsersEffect } from './store/effects/updateUsers.effect';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { GetAllUsersEffect } from './store/effects/getAllUsers.effect';
     StoreModule.forFeature('user', reducers),
     EffectsModule.forFeature([
       GetCurrentUserEffect,
-      GetAllUsersEffect
+      GetAllUsersEffect,
+      UpdateUsersEffect
     ]),
   ],
   providers: []

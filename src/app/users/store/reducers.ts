@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { UserStateInterface } from '../types/userState.interface';
 import { getCurrentUserAction, getCurrentUserFailureAction, getCurrentUserSuccessAction } from './actions/getCurrentUser.action';
 import { getAllUsersAction, getAllUsersFailureAction, getAllUsersSuccessAction } from './actions/getAllUsers.action';
+import { updateUserAction, updateUserFailureAction, updateUserSuccessAction } from './actions/updateUser.action';
 
 
 const initialState: UserStateInterface = {
@@ -12,6 +13,11 @@ const initialState: UserStateInterface = {
   isSubmittingAllUsers: false,
   isLoggedInAllUsers: null,
   usersList: null,
+
+  isSubmittingUpdateUser: false,
+  isLoggedInUpdate: null,
+  usersUpdate: null,
+  updateBackendErrorsResponse: null,
 };
 
 const userReducer = createReducer(
@@ -61,7 +67,34 @@ const userReducer = createReducer(
       isLoggedInAllUsers: false,
       usersList: null,
     })
-  )
+  ),
+  // updateUser
+  //currentUser-----------------------------------------------------
+  on(updateUserAction, ( state ): UserStateInterface => ({
+      ...state,
+      isSubmittingUpdateUser: true,
+      isLoggedInUpdate: null,
+      usersUpdate: null,
+      updateBackendErrorsResponse: null,
+    })
+  ),
+  on(updateUserSuccessAction,
+    ( state, action ): UserStateInterface => ({
+      ...state,
+      isSubmittingUpdateUser: false,
+      isLoggedInUpdate: true,
+      usersUpdate: action.userResponse,
+      updateBackendErrorsResponse: null,
+    })
+  ),
+  on(updateUserFailureAction, ( state, action ): UserStateInterface => ({
+      ...state,
+      isSubmittingUpdateUser: false,
+      isLoggedInUpdate: false,
+      usersUpdate: null,
+      updateBackendErrorsResponse: action.updateBackendErrorsResponse,
+    })
+  ),
 );
 
 
