@@ -47,10 +47,9 @@
 				</ion-select>
 			</ion-item>
 			
-			
-			<ion-item *ngFor="let base of userProps.base1cDTO">
-				<ion-label>{{base.name}}</ion-label>
-				<ion-toggle slot="start" color="success" checked="false"></ion-toggle>
+			<ion-item *ngFor="let base1c of base1cList$ | async">
+				<ion-label>{{base1c.name}}</ion-label>
+				<ion-toggle slot="start" color="success" checked="{{containsBase1c(base1c)}}"></ion-toggle>
 			</ion-item>
 			
 			

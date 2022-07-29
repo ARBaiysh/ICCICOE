@@ -16,6 +16,7 @@ import {AuthInterceptor} from './auth/services/authinterceptor.service';
 import {PersistenceService} from './auth/services/persistance.service';
 import {AuthModule} from './auth/auth.module';
 import {UsersModule} from './users/users.module';
+import {Base1cModule} from './base1c/base1c.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {UsersModule} from './users/users.module';
         }),
         AuthModule,
         UsersModule,
+        Base1cModule
     ],
     providers: [PersistenceService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},

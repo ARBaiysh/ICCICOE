@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { getCurrentUserAction, getCurrentUserFailureAction } from '../actions/getCurrentUser.action';
-import { UserInterface } from '../../types/userInterface';
-import { UserService } from '../../services/user.service';
-import { getAllUsersAction, getAllUsersFailureAction, getAllUsersSuccessAction } from '../actions/getAllUsers.action';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {catchError, map, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {UserInterface} from '../../types/userInterface';
+import {UserService} from '../../services/user.service';
+import {getAllUsersAction, getAllUsersFailureAction, getAllUsersSuccessAction} from '../actions/getAllUsers.action';
 
 
 @Injectable()
