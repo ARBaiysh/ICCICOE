@@ -43,9 +43,10 @@
 				<ion-label>
 					<p>{{item.resName}}</p>
 				</ion-label>
-				<div slot="end" class="is-list-colored-button-group">
-					<h3 class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{item.base1cDTO.length}}</h3>
-				</div>
+				
+				<ion-badge color="primary">{{item.base1cDTO.length}}</ion-badge>
+			
+			
 			</ion-item>
 			<div (click)="itemTapped(i)" class="ion-padding-horizontal">
 				<ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
@@ -59,6 +60,14 @@
 					</ion-row>
 					<ion-row>
 						<ion-col>
+							Email
+						</ion-col>
+						<ion-col class="is-color-primary ion-text-right">
+							{{item.email}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
 							Position
 						</ion-col>
 						<ion-col class="is-color-primary ion-text-right">
@@ -67,11 +76,15 @@
 					</ion-row>
 					<ion-row>
 						<div *ngFor="let base of item.base1cDTO let i = index">
-							<ion-button size="Small" fill="outline" shape="round">{{base.name}}</ion-button>
+							<p class="ion-text-wrap">/{{base.name}}</p>
 						</div>
 					</ion-row>
 					<ion-row>
-						<ion-button fill="outline" color="is-mute-normal">Cancel</ion-button>
+						<ion-button (click)="presentModalEditUser(item)">
+							<ion-icon slot="start" name="add-outline"></ion-icon>
+							Edit user
+						</ion-button>
+			
 					</ion-row>
 				</ion-grid>
 			</div>

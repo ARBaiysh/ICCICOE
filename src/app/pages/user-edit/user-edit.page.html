@@ -1,9 +1,9 @@
 <ion-header>
 	<ion-toolbar>
+		<ion-title>User edit</ion-title>
 		<ion-buttons slot="end">
-			<ion-back-button></ion-back-button>
+			<ion-button (click)="dismissModal()">Close</ion-button>
 		</ion-buttons>
-		<ion-title>Sign Up</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -12,21 +12,16 @@
 		<ion-list class="ion-padding-bottom">
 			<ion-item>
 				<ion-label color="primary" position="stacked">Name</ion-label>
-				<ion-input formControlName="username" type="text" placeholder="Name"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" position="stacked">Email</ion-label>
-				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+				<ion-input formControlName="username" type="text">{{userProps.username}}</ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">First name</ion-label>
-				<ion-input formControlName="firstName" type="text" placeholder="First name"></ion-input>
+				<ion-input formControlName="firstName" type="text">{{userProps.firstName}}</ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">Last name</ion-label>
-				<ion-input formControlName="lastName" type="text" placeholder="Last name"></ion-input>
+				<ion-input formControlName="lastName" type="text">{{userProps.lastName}}</ion-input>
 			</ion-item>
-			
 			<ion-item>
 				<ion-label color="primary" position="stacked">Position</ion-label>
 				<ion-select formControlName="position" interface="popover" placeholder="Position">
@@ -38,7 +33,6 @@
 					<ion-select-option value="Admin">Admin</ion-select-option>
 				</ion-select>
 			</ion-item>
-			
 			<ion-item>
 				<ion-label color="primary" position="stacked">RES name</ion-label>
 				<ion-select formControlName="resName" interface="popover" placeholder="RES name">
@@ -53,33 +47,32 @@
 				</ion-select>
 			</ion-item>
 			
-			<ion-item>
-				<ion-label color="primary" position="stacked">Password</ion-label>
-				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+			
+			<ion-item *ngFor="let base of userProps.base1cDTO">
+				<ion-label>{{base.name}}</ion-label>
+				<ion-toggle slot="start" color="success" checked="false"></ion-toggle>
 			</ion-item>
-			<ion-item>
-				<ion-label color="primary" position="stacked">Repeat Password</ion-label>
-				<ion-input formControlName="confirmPassword" type="password" placeholder="Repeat Password"></ion-input>
-			</ion-item>
+			
+			
+			<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+				<!--     <ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmitting$ | async)" (click)="onSubmit()">-->
+				<ion-item color="primary" button detail="true" type="submit" (click)="onSubmit()">
+					<ion-label>Save</ion-label>
+					<!--        <ng-container *ngIf="isSubmitting$|async">-->
+					<!--          <span>Please wait...</span>-->
+					<!--        </ng-container>-->
+				</ion-item>
+			</ion-list>
+			
+			<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+				<ion-item color="primary" button (click)="dismissModal()">
+					<ion-label>Cancel</ion-label>
+				</ion-item>
+			</ion-list>
+			
+			<!--    <ng-container *ngIf="backendErrors$ | async">-->
+			<!--      <app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>-->
+			<!--    </ng-container>-->
 		</ion-list>
-		
-		<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
-			<ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmitting$ | async)" (click)="onSubmit()">
-				<ion-label>Sign Up</ion-label>
-				<ng-container *ngIf="isSubmitting$|async">
-					<span>Please wait...</span>
-				</ng-container>
-			</ion-item>
-		</ion-list>
-		
-		<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
-			<ion-item color="primary" button  (click)="goBack()">
-				<ion-label>Cancel</ion-label>
-			</ion-item>
-		</ion-list>
-		
-		<ng-container *ngIf="backendErrors$ | async">
-			<app-backend-error-messages [backendErrors]="backendErrors$ | async"></app-backend-error-messages>
-		</ng-container>
 	</form>
 </ion-content>

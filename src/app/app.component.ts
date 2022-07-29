@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { App } from '@capacitor/app';
-import { AlertController, IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
+import {Component, ViewChild} from '@angular/core';
+import {App} from '@capacitor/app';
+import {AlertController, IonRouterOutlet, Platform} from '@ionic/angular';
 
-import { Location } from '@angular/common';
-import {getCurrentUserAction} from './users/store/actions/getCurrentUser.action';
+import {Location} from '@angular/common';
 
 
 @Component({

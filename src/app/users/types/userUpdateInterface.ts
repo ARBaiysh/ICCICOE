@@ -1,15 +1,12 @@
 import {ERoleInterface} from './eRoleInterface';
 import {Base1cInterface} from './base1cInterface';
 
-export interface UserInterface {
-    id: number;
+export interface UserUpdateInterface {
     username: string;
     firstName: string;
-    email: string;
     lastName: string;
     position: string;
     resName: string;
-    status: string;
     roles: ERoleInterface[];
     base1cDTO: Base1cInterface[];
 }

@@ -4,6 +4,8 @@ import { UserInterface } from '../../users/types/userInterface';
 import { select, Store } from '@ngrx/store';
 import { getAllUsersAction } from '../../users/store/actions/getAllUsers.action';
 import { isLoggedInAllUsersSelector, isSubmittingAllUsersSelector, usersListSelector } from '../../users/store/selectors';
+import {ModalController} from '@ionic/angular';
+import {UserEditPage} from '../user-edit/user-edit.page';
 
 @Component({
   selector: 'app-users-list',
@@ -19,7 +21,15 @@ export class UsersListPage implements OnInit {
 
   public isShown = [];
 
-  constructor( private store: Store ) {
+  constructor( private store: Store, public modalController: ModalController ) {
+  }
+
+  async presentModalEditUser(user: UserInterface) {
+    const modal = await this.modalController.create({
+      component: UserEditPage,
+      componentProps: {userProps: user}
+    });
+    return await modal.present();
   }
 
   ngOnInit() {
