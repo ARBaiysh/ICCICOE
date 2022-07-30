@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserEditPageRoutingModule } from './user-edit-routing.module';
 
 import { UserEditPage } from './user-edit.page';
-import {SidenavPageRoutingModule} from '../sidenav/sidenav-routing.module';
+
 
 @NgModule({
   imports: [
@@ -15,7 +15,6 @@ import {SidenavPageRoutingModule} from '../sidenav/sidenav-routing.module';
     FormsModule,
     IonicModule,
     UserEditPageRoutingModule,
-    SidenavPageRoutingModule,
     ReactiveFormsModule
   ],
   declarations: [UserEditPage]

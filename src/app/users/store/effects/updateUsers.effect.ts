@@ -19,13 +19,12 @@ export class UpdateUsersEffect {
       ))
     )
   );
-
   redirectAfterSubmit$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(updateUserAction),
+        ofType(updateUserSuccessAction),
         tap(() => {
-          this.router.navigateByUrl('/nav/user-list');
+          this.router.navigateByUrl('/nav/users-list');
         })
       ),
     {dispatch: false}
