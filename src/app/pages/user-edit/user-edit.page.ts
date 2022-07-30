@@ -8,10 +8,15 @@ import {select, Store} from '@ngrx/store';
 import {base1cListSelector, isLoggedInGetAllBase1cSelector, isSubmittingGetAllBase1cSelector} from '../../base1c/store/selectors';
 import {getAllBases1cAction} from '../../base1c/store/actions/getAllBase1c.action';
 import {BackendErrorsInterface} from '../../auth/types/backendErrorsInterface';
-import {isLoggedInUpdateSelector, isSubmittingUpdateUserSelector, updateBackendErrorsResponseSelector, usersUpdateSelector} from '../../users/store/selectors';
+import {
+    isLoggedInUpdateSelector,
+    isSubmittingUpdateUserSelector,
+    updateBackendErrorsResponseSelector,
+    usersUpdateSelector
+} from '../../users/store/selectors';
 import {updateUserAction} from '../../users/store/actions/updateUser.action';
 import {UserUpdateInterface} from '../../users/types/userUpdateInterface';
-import {ERoleInterface} from '../../users/types/eRoleInterface';
+
 
 @Component({
     selector: 'app-user-edit',
