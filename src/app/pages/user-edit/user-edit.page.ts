@@ -14,6 +14,7 @@ import {
   updateBackendErrorsResponseSelector,
   usersUpdateSelector
 } from '../../users/store/selectors';
+import { ERoleInterface } from '../../users/types/eRoleInterface';
 
 @Component({
   selector: 'app-user-edit',
@@ -33,6 +34,18 @@ export class UserEditPage implements OnInit {
   usersUpdate$: Observable<UserInterface | null>;
   updateBackendErrorsResponse: Observable<BackendErrorsInterface | null>;
 
+  eRole: ERoleInterface[];
+
+
+  roles: ERoleInterface[] = [
+    {name: 'ROLE_USER'},
+    {name: 'ROLE_MANAGER'},
+    {name: 'ROLE_MODERATOR'},
+    {name: 'ROLE_ADMIN'}
+  ];
+
+  cloneArrayRole: ERoleInterface[];
+  cloneArrayBase1s: Base1cInterface[];
 
   constructor( private fb: FormBuilder,
                public modalController: ModalController,
@@ -42,6 +55,8 @@ export class UserEditPage implements OnInit {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.dismissModal();
     });
+
+
   }
 
   initializeForm(): void {
@@ -65,6 +80,29 @@ export class UserEditPage implements OnInit {
     this.modalController.dismiss({dismissed: true});
   }
 
+
+  onSubmit() {
+    this.eRole = this.userProps.roles;
+  }
+
+  editArrayBase1c( $event: CustomEvent, base1c: Base1cInterface ) {
+    if ($event.detail.checked) {
+      console.log('add ' + base1c);
+    } else {
+      console.log('delete ' + base1c);
+    }
+    console.log(this.cloneArrayBase1s);
+  }
+
+  editArrayRole( $event: CustomEvent, role: ERoleInterface ) {
+    if ($event.detail.checked) {
+      console.log('add' + role);
+    } else {
+      console.log('delete' + role);
+    }
+    console.log(this.cloneArrayRole);
+  }
+
   containsBase1c( base1s: Base1cInterface ): boolean {
     let flag = false;
     this.userProps.base1cDTO.forEach(base => {
@@ -75,11 +113,21 @@ export class UserEditPage implements OnInit {
     return flag;
   }
 
-  onSubmit() {
-
+  containsRole( roleProp: ERoleInterface ): boolean {
+    let flag = false;
+    this.eRole.forEach(role => {
+      if (roleProp === role) {
+        flag = true;
+      }
+    });
+    return flag;
   }
 
   private initializeValues(): void {
+    this.cloneArrayRole = this.userProps.roles;
+    this.cloneArrayBase1s = this.userProps.base1cDTO;
+    console.log(this.cloneArrayBase1s);
+
     this.isSubmittingGetAllBase1c$ = this.store.pipe(select(isSubmittingGetAllBase1cSelector));
     this.isLoggedInGetAllBase1c$ = this.store.pipe(select(isLoggedInGetAllBase1cSelector));
     this.base1cList$ = this.store.pipe(select(base1cListSelector));
@@ -89,4 +137,6 @@ export class UserEditPage implements OnInit {
     this.usersUpdate$ = this.store.pipe(select(usersUpdateSelector));
     this.updateBackendErrorsResponse = this.store.pipe(select(updateBackendErrorsResponseSelector));
   }
+
+
 }
