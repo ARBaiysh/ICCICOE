@@ -8,7 +8,6 @@ import {loginAction, loginFailureAction, loginSuccessAction} from '../actions/lo
 import {LoginResponseInterface} from '../../types/loginResponseInterface';
 import {AuthService} from '../../services/auth.service';
 import {PersistenceService} from '../../services/persistance.service';
-import {Store} from '@ngrx/store';
 
 
 @Injectable()

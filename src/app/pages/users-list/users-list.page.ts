@@ -51,6 +51,4 @@ export class UsersListPage implements OnInit {
     this.isLoggedInAllUsers$ = this.store.pipe(select(isLoggedInAllUsersSelector));
     this.usersList$ = this.store.pipe(select(usersListSelector));
   }
-
-
 }

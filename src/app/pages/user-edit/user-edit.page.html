@@ -9,26 +9,26 @@
 </ion-header>
 
 <ion-content>
-	<form [formGroup]="form">
+	<form [formGroup]="profileForm">
 		<ion-list class="ion-padding-bottom">
 			<ion-item>
 				<ion-label color="primary" position="stacked">ID: {{userProps.id}} | email: {{userProps.email}}</ion-label>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">Name</ion-label>
-				<ion-input formControlName="username" type="text" [(ngModel)]="userProps.username"></ion-input>
+				<ion-input type="text" formControlName="username"></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">First name</ion-label>
-				<ion-input formControlName="firstName" type="text" [(ngModel)]="userProps.firstName"></ion-input>
+				<ion-input type="text" formControlName="firstName"></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">Last name</ion-label>
-				<ion-input formControlName="lastName" type="text" [(ngModel)]="userProps.lastName"></ion-input>
+				<ion-input type="text" formControlName="lastName"></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">Position</ion-label>
-				<ion-select formControlName="position" interface="popover" [(ngModel)]="userProps.position">
+				<ion-select interface="popover" formControlName="position">
 					<ion-select-option value="Dir">Dir</ion-select-option>
 					<ion-select-option value="Nachalnak">Nachalnak</ion-select-option>
 					<ion-select-option value="Injener">Injener</ion-select-option>
@@ -39,7 +39,7 @@
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" position="stacked">RES name</ion-label>
-				<ion-select formControlName="resName" interface="popover" [(ngModel)]="userProps.resName">
+				<ion-select interface="popover" formControlName="resName">
 					<ion-select-option value="OE">OE</ion-select-option>
 					<ion-select-option value="Osh sbyt">Osh sbyt</ion-select-option>
 					<ion-select-option value="Karasuu RES">Karasuu RES</ion-select-option>
@@ -51,7 +51,6 @@
 				</ion-select>
 			</ion-item>
 			
-			
 			<ion-item *ngFor="let base1c of base1cList$ | async">
 				<ion-label>{{base1c.name}}</ion-label>
 				<ion-toggle slot="start" color="success" checked="{{containsBase1c(base1c)}}" (ionChange)="editArrayBase1c($event, base1c)"></ion-toggle>
@@ -59,7 +58,7 @@
 			
 			
 			<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
-				<ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmittingUpdateUser$ | async)"
+				<ion-item color="primary" button detail="true" type="submit" [disabled]="(isSubmittingUpdateUser$ | async)"
 				          (click)="onSubmit()">
 					<ion-label>Save</ion-label>
 					<ng-container *ngIf="isSubmittingUpdateUser$|async">

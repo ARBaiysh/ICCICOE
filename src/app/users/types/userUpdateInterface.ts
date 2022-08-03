@@ -2,7 +2,7 @@ import {ERoleInterface} from './eRoleInterface';
 import {Base1cInterface} from './base1cInterface';
 
 export interface UserUpdateInterface {
-    id: string;
+    id: number;
     username: string;
     firstName: string;
     lastName: string;
