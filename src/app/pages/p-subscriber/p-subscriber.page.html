@@ -7,9 +7,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isLoggedInGetPSubscribers$|async">
-  <ion-list lines="none" class="is-list-colored">
-    <div *ngFor="let item of pSubscriberList$|async; let i = index">
+<ion-content>
+  <div *ngIf="isSubmittingGetPSubscribers$|async">
+    <ion-progress-bar type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, base1c)">
+    <ion-refresher-content color="primary"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="isLoggedInGetPSubscribers$|async " lines="none" class="is-list-colored">
+    <ion-searchbar placeholder="Search..." [(ngModel)]="searchTerm" show-cancel-button="focus"></ion-searchbar>
+
+    <div *ngFor="let item of pSubscriberList$|async | filter:searchTerm let i = index">
       <ion-item [ngClass]="item.nameProm">
         <ion-label>
           <h2 (click)="itemTapped(i)">{{item.lsProm}}

@@ -9,6 +9,7 @@ import {
   isSubmittingGetPSubscribersSelector,
   pSubscriberListSelector
 } from '../../base1c/store/selectors';
+import { getPSubscribersAction } from '../../base1c/store/actions/getPSubscribers.action';
 
 @Component({
   selector: 'app-p-subscriber',
@@ -17,7 +18,7 @@ import {
 })
 export class PSubscriberPage implements OnInit {
   base1c: Base1cInterface;
-
+  searchTerm: string;
   public isShown = [];
 
   isSubmittingGetPSubscribers$: Observable<boolean>;
@@ -37,9 +38,16 @@ export class PSubscriberPage implements OnInit {
     this.isShown[index] = !this.isShown[index];
   }
 
+  doRefresh( $event: any, base1c: Base1cInterface ) {
+    this.store.dispatch(getPSubscribersAction({base1c}));
+    $event.target.complete();
+  }
+
   private initializeValues() {
     this.isSubmittingGetPSubscribers$ = this.store.pipe(select(isSubmittingGetPSubscribersSelector));
     this.isLoggedInGetPSubscribers$ = this.store.pipe(select(isLoggedInGetPSubscribersSelector));
     this.pSubscriberList$ = this.store.pipe(select(pSubscriberListSelector));
   }
+
+
 }
