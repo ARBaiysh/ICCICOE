@@ -16,4 +16,18 @@ export const base1cListSelector = createSelector(base1cFeatureSelector,
     (base1cState: Base1cStateInterface) => base1cState.base1cList
 );
 
+export const isSubmittingGetPSubscribersSelector = createSelector(base1cFeatureSelector,
+  (base1cState: Base1cStateInterface) => base1cState.isSubmittingGetPSubscribers
+);
+
+export const isLoggedInGetPSubscribersSelector = createSelector(base1cFeatureSelector,
+  (base1cState: Base1cStateInterface) => base1cState.isLoggedInGetPSubscribers
+);
+export const pSubscriberListSelector = createSelector(base1cFeatureSelector,
+  (base1cState: Base1cStateInterface) => base1cState.pSubscriberList
+);
+
+
+
+
 

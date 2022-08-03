@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Base1cInterface } from '../../users/types/base1cInterface';
 import { environment } from '../../../environments/environment';
+import { PSubscriberInterface } from '../types/pSubscriber.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,6 @@ export class Base1cService {
   constructor( private http: HttpClient ) {
   }
 
-  getAllBase1c(): Observable<Base1cInterface[]> {
-    const url = environment.apiUrl + '/base1c/all';
-    return this.http.get<Base1cInterface[]>(url);
-  }
-
   setBase1c( base1c: Base1cInterface ): void {
     this.base1c = base1c;
   }
@@ -26,4 +22,15 @@ export class Base1cService {
   getBase1c(): Base1cInterface {
     return this.base1c;
   }
+
+  getAllBase1c(): Observable<Base1cInterface[]> {
+    const url = environment.apiUrl + '/base1c/all';
+    return this.http.get<Base1cInterface[]>(url);
+  }
+
+  getPSubscribers( base1c: Base1cInterface ): Observable<PSubscriberInterface[]> {
+    const url = environment.apiUrl + '/base1c/' + base1c.id;
+    return this.http.get<PSubscriberInterface[]>(url);
+  }
+
 }

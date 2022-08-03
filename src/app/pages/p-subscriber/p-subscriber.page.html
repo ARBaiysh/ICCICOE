@@ -3,10 +3,57 @@
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{base1c?.name}}</ion-title>
+    <ion-title slot="secondary">{{base1c?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content *ngIf="isLoggedInGetPSubscribers$|async">
+  <ion-list lines="none" class="is-list-colored">
+    <div *ngFor="let item of pSubscriberList$|async; let i = index">
+      <ion-item [ngClass]="item.nameProm">
+        <ion-label>
+          <h2 (click)="itemTapped(i)">{{item.lsProm}}
+            <ion-icon name="arrow-down" *ngIf="!isShown[i]"></ion-icon>
+            <ion-icon name="arrow-up" *ngIf="isShown[i]"></ion-icon>
+          </h2>
+          <p>{{item.dateUpdate}}</p>
+        </ion-label>
+        <div slot="end" class="is-list-colored-button-group">
+          <h3>{{item.dolg}}</h3>
+        </div>
+      </ion-item>
+      <div class="ion-padding-horizontal">
+        <ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
+          <ion-row>
+            <ion-col>
+              Transaction number
+            </ion-col>
+            <ion-col class="ion-text-right">
+              {{item.addressProm}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Profile ID
+            </ion-col>
+            <ion-col class="ion-text-right">
+              {{item.numContract}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              E-mail
+            </ion-col>
+            <ion-col class="is-color-primary ion-text-right">
+              {{item.addressProm}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button fill="outline">New Payment</ion-button>
+            <ion-button fill="outline" color="is-mute-normal">Cancel</ion-button>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </ion-list>
 </ion-content>

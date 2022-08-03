@@ -7,15 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPageRoutingModule } from './about-routing.module';
 
 import { AboutPage } from './about.page';
-import { PSubscriberPageModule } from '../p-subscriber/p-subscriber.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        AboutPageRoutingModule,
-        PSubscriberPageModule
+        AboutPageRoutingModule
     ],
   declarations: [AboutPage]
 })

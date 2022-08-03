@@ -5,6 +5,7 @@ import { UserInterface } from '../../users/types/userInterface';
 import { currentUserSelector, isLoggedInCurrentUserSelector, isSubmittingCurrentUserSelector } from '../../users/store/selectors';
 import { Base1cService } from '../../base1c/service/base1c.service';
 import { Base1cInterface } from '../../users/types/base1cInterface';
+import { getPSubscribersAction } from '../../base1c/store/actions/getPSubscribers.action';
 
 @Component({
   selector: 'app-about',
@@ -25,6 +26,7 @@ export class AboutPage implements OnInit {
 
   setBase1c( base1c: Base1cInterface ) {
     this.base1cService.setBase1c(base1c);
+    this.store.dispatch(getPSubscribersAction({base1c}));
   }
 
   private initializeValues() {
