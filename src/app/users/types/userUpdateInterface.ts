@@ -1,4 +1,3 @@
-import {ERoleInterface} from './eRoleInterface';
 import {Base1cInterface} from './base1cInterface';
 
 export interface UserUpdateInterface {
@@ -8,6 +7,6 @@ export interface UserUpdateInterface {
     lastName: string;
     position: string;
     resName: string;
-    roles: ERoleInterface[];
+    roles: string[];
     base1cDTO: Base1cInterface[];
 }
