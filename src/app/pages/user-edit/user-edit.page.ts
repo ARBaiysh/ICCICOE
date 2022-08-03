@@ -16,6 +16,7 @@ import {
 import {updateUserAction} from '../../users/store/actions/updateUser.action';
 import {UserUpdateInterface} from '../../users/types/userUpdateInterface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {getAllUsersAction} from '../../users/store/actions/getAllUsers.action';
 
 
 @Component({
@@ -69,9 +70,9 @@ export class UserEditPage implements OnInit {
         const userUpdateRequest: UserUpdateInterface = this.profileForm.value;
         userUpdateRequest.base1cDTO = this.cloneArrayBase1s;
         this.store.dispatch(updateUserAction({userUpdateRequest}));
-        console.log(isSubmittingUpdateUserSelector);
-        this.isSubmittingUpdateUser$.subscribe(value => {
-            if (!value) {
+        this.isLoggedInUpdate$.subscribe(value => {
+            if (value) {
+                this.store.dispatch(getAllUsersAction());
                 this.dismissModal();
             }
         });
@@ -79,13 +80,10 @@ export class UserEditPage implements OnInit {
 
     editArrayBase1c($event: CustomEvent, base1c: Base1cInterface) {
         if ($event.detail.checked) {
-            console.log('add ' + base1c.name);
             this.cloneArrayBase1s.push(base1c);
         } else {
-            console.log('delete ' + base1c.name);
             this.cloneArrayBase1s = this.cloneArrayBase1s.filter(base => base.name !== base1c.name);
         }
-        console.log(this.cloneArrayBase1s);
     }
 
     containsBase1c(base1s: Base1cInterface): boolean {
