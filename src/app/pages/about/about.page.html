@@ -15,4 +15,22 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-grid *ngFor="let base1c of (currentUser$|async)?.base1cDTO ; index as i">
+    <ion-row>
+      <ion-col class="is-tile-colored">
+        <ion-item [routerLink]="['/p-subscriber']" (click)="setBase1c(base1c)" lines="none" class="ion-text-start">
+          <ion-label class="ion-no-margin">
+            <div [ngClass]="i % 2 === 0 ? 'is-background-primary' : 'is-background-success'" class="ion-padding">
+              <h2 class="is-tile-text">
+                {{i + 1}}. {{base1c.name}}
+                <ion-icon name="flash-outline"></ion-icon>
+              </h2>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
