@@ -5,7 +5,6 @@ import {UserInterface} from '../../users/types/userInterface';
 import {currentUserSelector, isLoggedInCurrentUserSelector, isSubmittingCurrentUserSelector} from '../../users/store/selectors';
 import {Base1cService} from '../../base1c/service/base1c.service';
 import {Base1cInterface} from '../../users/types/base1cInterface';
-import {getPSubscribersAction} from '../../base1c/store/actions/getPSubscribers.action';
 
 @Component({
     selector: 'app-about',

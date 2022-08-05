@@ -4,8 +4,13 @@ import {PSubscriberInterface} from '../../types/pSubscriber.interface';
 import {Base1cInterface} from '../../../users/types/base1cInterface';
 
 
-export const getPSubscribersAction = createAction(
-    ActionTypes.getPSubscribers,
+export const getNewPSubscribersAction = createAction(
+    ActionTypes.getNewPSubscribers,
+    props<{ base1c: Base1cInterface; offset: number }>()
+);
+
+export const getNextPSubscribersAction = createAction(
+    ActionTypes.getNextPSubscribers,
     props<{ base1c: Base1cInterface; offset: number }>()
 );
 

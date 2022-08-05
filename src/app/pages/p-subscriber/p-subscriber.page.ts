@@ -4,9 +4,11 @@ import {Base1cInterface} from '../../users/types/base1cInterface';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {isLoggedInGetPSubscribersSelector, isSubmittingGetPSubscribersSelector, pSubscriberListSelector} from '../../base1c/store/selectors';
-import {getPSubscribersAction} from '../../base1c/store/actions/getPSubscribers.action';
+import {getNextPSubscribersAction, getNewPSubscribersAction} from '../../base1c/store/actions/getPSubscribers.action';
 import {IonInfiniteScroll} from '@ionic/angular';
 import {PSubscriberInterface} from '../../base1c/types/pSubscriber.interface';
+import {isLoggedInAllUsersSelector, isSubmittingAllUsersSelector} from '../../users/store/selectors';
+import {getAllUsersAction} from '../../users/store/actions/getAllUsers.action';
 
 @Component({
     selector: 'app-p-subscriber',
@@ -20,7 +22,11 @@ export class PSubscriberPage implements OnInit {
     offset: number;
     isShown = [];
 
-    pSubscriberList: PSubscriberInterface[] = [];
+    // pSubscriberList: PSubscriberInterface[] = [];
+
+    isSubmittingGetPSubscribers$: Observable<boolean>;
+    isLoggedInGetPSubscribers$: Observable<boolean | null>;
+    pSubscriberList$: Observable<PSubscriberInterface[] | null>;
 
 
     constructor(private base1cService: Base1cService, private store: Store) {
@@ -37,24 +43,31 @@ export class PSubscriberPage implements OnInit {
     }
 
     doRefresh($event: any): void {
-        this.pSubscriberList = [];
+        // this.pSubscriberList = [];
+
         $event.target.complete();
     }
 
     loadData(event): void {
-        this.base1cService.getPSubscribers(this.base1c, this.offset += 1).subscribe(data => {
-            this.pSubscriberList = [...this.pSubscriberList, ...data];
-            console.log(this.pSubscriberList);
-        });
+        this.store.dispatch(getNextPSubscribersAction({base1c: this.base1c, offset: this.offset += 1}));
+
+        // this.base1cService.getPSubscribers(this.base1c, this.offset += 1).subscribe(data => {
+        //     this.pSubscriberList = [...this.pSubscriberList, ...data];
+        //     console.log(this.pSubscriberList);
+        // });
 
         event.target.complete();
     }
 
     private initializeValues(): void {
-        this.base1cService.getPSubscribers(this.base1c, this.offset).subscribe(data => {
-            this.pSubscriberList = [...this.pSubscriberList, ...data];
-            console.log(this.pSubscriberList);
-        });
+        this.store.dispatch(getNewPSubscribersAction({base1c: this.base1c, offset: this.offset}));
+        this.isSubmittingGetPSubscribers$ = this.store.pipe(select(isSubmittingGetPSubscribersSelector));
+        this.isLoggedInGetPSubscribers$ = this.store.pipe(select(isLoggedInGetPSubscribersSelector));
+        this.pSubscriberList$ = this.store.pipe(select(pSubscriberListSelector));
+        // this.base1cService.getPSubscribers(this.base1c, this.offset).subscribe(data => {
+        //     this.pSubscriberList = [...this.pSubscriberList, ...data];
+        //     console.log(this.pSubscriberList);
+        // });
     }
 
 }
