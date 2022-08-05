@@ -22,14 +22,14 @@ export class SidenavPage implements OnInit {
 
     navsAdmin = [
         {
-            name: 'Users',
+            name: 'Пользователи',
             link: '/nav/users-list',
-            icon: 'list-outline'
+            icon: 'people'
         },
         {
-            name: 'About',
+            name: 'РЭСы',
             link: '/nav/about',
-            icon: 'person-circle'
+            icon: 'business'
         },
         {
             name: 'Blog',
@@ -45,9 +45,9 @@ export class SidenavPage implements OnInit {
 
     navs = [
         {
-            name: 'About',
+            name: 'РЭСы',
             link: '/nav/about',
-            icon: 'person-circle'
+            icon: 'business'
         },
         {
             name: 'Blog',

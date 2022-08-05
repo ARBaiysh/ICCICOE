@@ -29,7 +29,7 @@ export class Base1cService {
   }
 
   getPSubscribers( base1c: Base1cInterface ): Observable<PSubscriberInterface[]> {
-    const url = environment.apiUrl + '/base1c/' + base1c.id;
+    const url = environment.apiUrl + '/PSub/all/' + base1c.id;
     return this.http.get<PSubscriberInterface[]>(url);
   }
 

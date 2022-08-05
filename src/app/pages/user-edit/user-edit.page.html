@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>User edit</ion-title>
+		<ion-title>Edit user {{userProps.email}}</ion-title>
 		<ion-buttons slot="end">
 			<ion-button (click)="dismissModal()">Close</ion-button>
 		</ion-buttons>
@@ -58,7 +58,7 @@
 			
 			
 			<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
-				<ion-item color="primary" button detail="true" type="submit" [disabled]="(isSubmittingUpdateUser$ | async)"
+				<ion-item color="primary" button detail="true" type="submit" [disabled]="profileForm.invalid || (isSubmittingUpdateUser$ | async)"
 				          (click)="onSubmit()">
 					<ion-label>Save</ion-label>
 					<ng-container *ngIf="isSubmittingUpdateUser$|async">
