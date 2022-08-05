@@ -10,13 +10,13 @@
 <ion-content>
 	<ion-progress-bar *ngIf="isSubmittingGetPSubscribers$|async" type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
 	
-	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, base1c)">
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content color="primary"></ion-refresher-content>
 	</ion-refresher>
 	
-	<ion-list *ngIf="isLoggedInGetPSubscribers$|async" lines="full" class="is-list-colored">
+	<ion-list *ngIf="pSubscriberList.length > 0" lines="full" class="is-list-colored">
 		<ion-searchbar placeholder="Search..." [(ngModel)]="searchTerm" show-cancel-button="focus"></ion-searchbar>
-		<div *ngFor="let item of pSubscriberList$|async | slice:startScrollPosition:endScrollPosition |filter: searchTerm; let i = index">
+		<div *ngFor="let item of pSubscriberList | filter: searchTerm; let i = index">
 			<ion-item [ngClass]="item.dolg <= 0 ? 'is-item-category-success' : 'is-item-category-danger'" (click)="itemTapped(i)">
 				<ion-label>
 					<h2>

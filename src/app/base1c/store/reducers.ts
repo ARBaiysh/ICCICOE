@@ -11,7 +11,7 @@ const initialState: Base1cStateInterface = {
 
   isSubmittingGetPSubscribers: false,
   isLoggedInGetPSubscribers: null,
-  pSubscriberList: null,
+  pSubscriberList: [],
 };
 
 const base1cReducer = createReducer(
@@ -43,7 +43,7 @@ const base1cReducer = createReducer(
       ...state,
     isSubmittingGetPSubscribers: true,
     isLoggedInGetPSubscribers: null,
-    pSubscriberList: null,
+    pSubscriberList: [],
     })
   ),
   on(getPSubscribersSuccessAction, ( state, action ): Base1cStateInterface => ({
@@ -57,7 +57,7 @@ const base1cReducer = createReducer(
       ...state,
       isSubmittingGetPSubscribers: false,
       isLoggedInGetPSubscribers: false,
-      pSubscriberList: null
+      pSubscriberList: []
     })
   ),
 );

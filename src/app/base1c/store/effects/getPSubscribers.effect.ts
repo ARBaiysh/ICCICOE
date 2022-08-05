@@ -11,7 +11,7 @@ import { PSubscriberInterface } from '../../types/pSubscriber.interface';
 export class GetPSubscribersEffect {
   getPSubscribers$ = createEffect(() => this.actions$.pipe(
       ofType(getPSubscribersAction),
-      switchMap(( {base1c} ) => this.base1cService.getPSubscribers(base1c).pipe(
+      switchMap(( {base1c, offset} ) => this.base1cService.getPSubscribers(base1c, offset).pipe(
         map(( pSubscriberList: PSubscriberInterface[] ) => getPSubscribersSuccessAction({pSubscriberList})),
         catchError(() => of(getPSubscribersFailureAction()))
       ))
