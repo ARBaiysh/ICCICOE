@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { SidenavPage } from './sidenav.page';
 
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'users-list',
-        loadChildren: () => import('../users-list/users-list.module').then( m => m.UsersListPageModule)
+        loadChildren: () => import('../users-list/users-list.module').then(m => m.UsersListPageModule)
       },
       {
         path: 'about',
@@ -37,4 +37,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SidenavPageRoutingModule {}
+export class SidenavPageRoutingModule {
+}

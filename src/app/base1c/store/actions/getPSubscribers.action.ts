@@ -14,6 +14,11 @@ export const getNextPSubscribersAction = createAction(
     props<{ base1c: Base1cInterface; offset: number }>()
 );
 
+export const getSearchPSubscribersAction = createAction(
+  ActionTypes.getSearchPSubscribers ,
+  props<{ base1c: Base1cInterface; searchLine: string }>()
+);
+
 export const getPSubscribersSuccessAction = createAction(
     ActionTypes.getPSubscribersSuccess,
     props<{ pSubscriberList: PSubscriberInterface[] }>()
