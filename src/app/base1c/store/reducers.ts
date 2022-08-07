@@ -2,11 +2,13 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Base1cStateInterface } from '../types/base1cState.interface';
 import { getAllBases1cAction, getAllBases1cFailureAction, getAllBases1cSuccessAction } from './actions/getAllBase1c.action';
 import {
-  getNextPSubscribersAction,
   getNewPSubscribersAction,
+  getNextPSubscribersAction,
   getPSubscribersFailureAction,
-  getPSubscribersSuccessAction, getSearchPSubscribersAction
+  getPSubscribersSuccessAction,
+  getSearchPSubscribersAction
 } from './actions/getPSubscribers.action';
+import { getPSubscriberAction, getPSubscriberFailureAction, getPSubscriberSuccessAction } from './actions/getPSubscriber.action';
 
 
 const initialState: Base1cStateInterface = {
@@ -17,6 +19,10 @@ const initialState: Base1cStateInterface = {
   isSubmittingGetPSubscribers: false,
   isLoggedInGetPSubscribers: null,
   pSubscriberList: [],
+
+  isSubmittingGetPSubscriber: false,
+  isLoggedInGetPSubscriber: null,
+  pSubscriber: null,
 };
 
 const base1cReducer = createReducer(
@@ -44,7 +50,7 @@ const base1cReducer = createReducer(
     })
   ),
 
-//GetPSubscriber-----------------------------------------------------
+//GetPSubscribers-----------------------------------------------------
   on(getNewPSubscribersAction, ( state ): Base1cStateInterface => ({
       ...state,
       isSubmittingGetPSubscribers: true,
@@ -72,17 +78,38 @@ const base1cReducer = createReducer(
       pSubscriberList: [...state.pSubscriberList, ...action.pSubscriberList]
     })
   ),
-  on(getPSubscribersFailureAction, ( state, action ): Base1cStateInterface => ({
+  on(getPSubscribersFailureAction, ( state ): Base1cStateInterface => ({
       ...state,
       isSubmittingGetPSubscribers: false,
       isLoggedInGetPSubscribers: false,
       pSubscriberList: []
     })
   ),
+
+  //GetPSubscribers-----------------------------------------------------
+  on(getPSubscriberAction, ( state ): Base1cStateInterface => ({
+      ...state,
+      isSubmittingGetPSubscriber: true,
+      isLoggedInGetPSubscriber: null,
+      pSubscriber: null,
+    })
+  ),
+  on(getPSubscriberSuccessAction, ( state, action ): Base1cStateInterface => ({
+      ...state,
+      isSubmittingGetPSubscriber: false,
+      isLoggedInGetPSubscriber: true,
+      pSubscriber: action.pSubscriber,
+    })
+  ),
+  on(getPSubscriberFailureAction, ( state ): Base1cStateInterface => ({
+      ...state,
+      isSubmittingGetPSubscriber: false,
+      isLoggedInGetPSubscriber: false,
+      pSubscriber: null,
+    })
+  ),
 );
 
 export function reducers( state: Base1cStateInterface, action: Action ) {
-
-
   return base1cReducer(state, action);
 }

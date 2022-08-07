@@ -8,4 +8,8 @@ export enum ActionTypes {
     getSearchPSubscribers = '[PSubscribers] Search Get PSubscribers',
     getPSubscribersSuccess = '[PSubscribers] Get PSubscribers success',
     getPSubscribersFailure = '[PSubscribers] Get PSubscribers failure',
+
+    getPSubscriber = '[PSubscriber] Get PSubscriber',
+    getPSubscriberSuccess = '[PSubscriber] Get PSubscriber success',
+    getPSubscriberFailure = '[PSubscriber] Get PSubscriber failure',
 }

@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { GetAllBase1cEffect } from './store/effects/getAllBase1c.effect';
 import { reducers } from './store/reducers';
 import { GetPSubscribersEffect } from './store/effects/getPSubscribers.effect';
+import { GetPSubscriberEffect } from './store/effects/getPSubscriber.effect';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { GetPSubscribersEffect } from './store/effects/getPSubscribers.effect';
     StoreModule.forFeature('base1c', reducers),
     EffectsModule.forFeature([
       GetAllBase1cEffect,
-      GetPSubscribersEffect
+      GetPSubscribersEffect,
+      GetPSubscriberEffect
     ]),
   ]
 })

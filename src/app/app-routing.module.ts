@@ -7,6 +7,11 @@ const routes: Routes = [
   {path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)},
   {path: 'user-edit', loadChildren: () => import('./pages/user-edit/user-edit.module').then(m => m.UserEditPageModule)},
   {path: 'p-subscriber', loadChildren: () => import('./pages/p-subscriber/p-subscriber.module').then(m => m.PSubscriberPageModule)},
+  {
+    path: 'metering-point-list',
+    loadChildren: () => import('./pages/metering-point-list/metering-point-list.module').then(m => m.MeteringPointListPageModule)
+  },
+
 
 ];
 

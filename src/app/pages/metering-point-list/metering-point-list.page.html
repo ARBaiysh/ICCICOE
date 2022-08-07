@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small">{{pSubscriber.nameProm}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoggedInGetPSubscriber$|async">
+    {{(pSubscriber$|async).subdivision}}
+    {{(pSubscriber$|async).dateUpdate}}
+  </div>
+  <div>
+    {{(pSubscriber$|async)?.meteringPoints.length}}
+  </div>
+
+  <ion-list *ngFor="let meteringPoints of (pSubscriber$|async)?.meteringPoints">
+    <ion-item> {{meteringPoints.nameAbon}}</ion-item>
+    <ion-item> {{meteringPoints.meterReading}}</ion-item>
+  </ion-list>
+
+</ion-content>

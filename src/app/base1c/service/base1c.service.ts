@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Base1cInterface } from '../../users/types/base1cInterface';
 import { environment } from '../../../environments/environment';
 import { PSubscriberInterface } from '../types/pSubscriber.interface';
+import { PSubscriberEntityInterface } from '../types/pSubscriberEntity.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,17 @@ export class Base1cService {
 
   base1c: Base1cInterface;
 
+  pSubscriber: PSubscriberInterface;
+
   constructor( private http: HttpClient ) {
+  }
+
+  getPSubscriber(): PSubscriberInterface {
+    return this.pSubscriber;
+  }
+
+  setPSubscriber( pSubscriber: PSubscriberInterface ): void {
+    this.pSubscriber = pSubscriber;
   }
 
   setBase1c( base1c: Base1cInterface ): void {
@@ -36,6 +47,11 @@ export class Base1cService {
   getPSubscribersSearch( base1c: Base1cInterface, searchLine: string = '' ): Observable<PSubscriberInterface[]> {
     const url = environment.apiUrl + '/PSub/search/' + base1c.id + ':' + searchLine;
     return this.http.get<PSubscriberInterface[]>(url);
+  }
+
+  getPSubscribersByLsProm( lsProm: string ): Observable<PSubscriberEntityInterface> {
+    const url = environment.apiUrl + '/PSub/' + lsProm;
+    return this.http.get<PSubscriberEntityInterface>(url);
   }
 
 

@@ -1,0 +1,30 @@
+export interface MeteringPointEntityInterface {
+  lsAbon: string;
+  lsProm: string;
+  nameAbon: string;
+  addressAbon: string;
+  telAbon: string;
+  tarif: string;
+  dolg: string;
+  tp: string;
+  power: string;
+  tu: string;
+  gosPlomb: string;
+  disposablePlomb: string;
+  boxPlomb: string;
+  lidPlomb: string;
+  ttPlomb: string;
+  shieldTTPlomb: string;
+  shieldTNPlomb: string;
+  rtnPlomb: string;
+  abtnPlomb: string;
+  namePU: string;
+  numPU: string;
+  coeffTT: string;
+  ampere: string;
+  phase: string;
+  locationPU: string;
+  meterReading: string;
+  lastDateReading: string;
+  dateUpdate: string;
+}
