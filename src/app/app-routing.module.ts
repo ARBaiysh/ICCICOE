@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'metering-point-list',
     loadChildren: () => import('./pages/metering-point-list/metering-point-list.module').then(m => m.MeteringPointListPageModule)
+  },  {
+    path: 'metering-point-details',
+    loadChildren: () => import('./pages/metering-point-details/metering-point-details.module').then( m => m.MeteringPointDetailsPageModule)
   },
+
 
 
 ];

@@ -1,98 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title slot="start">{{base1c?.name}}</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title slot="start">{{base1c?.name}}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Search..." [(ngModel)]="searchLine" (ionChange)="findPSubscribers()" show-cancel-button="focus"></ion-searchbar>
-  <ion-progress-bar *ngIf="isSubmittingGetPSubscribers$|async" type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content color="primary"></ion-refresher-content>
-  </ion-refresher>
-
-  <ion-list *ngIf="(pSubscriberList$|async).length > 0" lines="full" class="is-list-colored">
-    <div *ngFor="let pSubscriber of pSubscriberList$|async; let i = index">
-      <ion-item [ngClass]="pSubscriber.dolg <= 0 ? 'is-item-category-success' : 'is-item-category-danger'" (click)="itemTapped(i)">
-        <ion-label>
-          <h2>
-            {{pSubscriber.numContract}} / {{pSubscriber.lsProm}}
-            <ion-icon name="arrow-down" *ngIf="!isShown[i]"></ion-icon>
-            <ion-icon name="arrow-up" *ngIf="isShown[i]"></ion-icon>
-          </h2>
-          <p>{{pSubscriber.nameProm}}</p>
-          <p>{{pSubscriber.dateUpdate}}</p>
-        </ion-label>
-        <div slot="end" class="is-list-colored-button-group">
-          <h3>{{pSubscriber.dolg |number:'0.1-2'}}</h3>
-        </div>
-      </ion-item>
-      <div class="ion-padding-horizontal">
-        <ion-grid [class.is-hide]="!isShown[i] || false" class="ion-no-padding">
-          <div (click)="itemTapped(i)">
-            <ion-row>
-              <ion-col class="hydrated">№ контракта</ion-col>
-              <ion-col class="ion-text-right hydrated">
-                {{pSubscriber.numContract}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col class="hydrated">Л.с для оплаты</ion-col>
-              <ion-col class="ion-text-right hydrated">
-                {{pSubscriber.lsProm}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                Имя
-              </ion-col>
-              <ion-col class="ion-text-right">
-                {{pSubscriber.nameProm}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                Адрес
-              </ion-col>
-              <ion-col class="ion-text-right">
-                {{pSubscriber.addressProm}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                Дебит
-              </ion-col>
-              <ion-col class="ion-text-right">
-                {{pSubscriber.dolg}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                Дата обновления
-              </ion-col>
-              <ion-col class="ion-text-right">
-                {{pSubscriber.dateUpdate}}
-              </ion-col>
-            </ion-row>
-            <br>
-          </div>
-
-          <ion-row>
-            <ion-col>
-              <ion-item style="border-radius: 5px" button color="primary" detail="true">
-                <ion-label [routerLink]="['/metering-point-list']" (click)="setPSubscriber(pSubscriber)">Точка учета</ion-label>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-  </ion-list>
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+	<ion-searchbar placeholder="Search..." [(ngModel)]="searchLine" (ionChange)="findPSubscribers()" show-cancel-button="focus"></ion-searchbar>
+	<ion-progress-bar *ngIf="isSubmittingGetPSubscribers$|async" type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content color="primary"></ion-refresher-content>
+	</ion-refresher>
+	
+	<ion-list *ngIf="(pSubscriberList$|async).length > 0" lines="full" class="is-list-colored">
+		<div *ngFor="let pSubscriber of pSubscriberList$|async; let i = index">
+			<ion-item [ngClass]="pSubscriber.dolg <= 0 ? 'is-item-category-success' : 'is-item-category-danger'" (click)="itemTapped(i)">
+				<ion-label [routerLink]="['/metering-point-list']" (click)="setPSubscriber(pSubscriber)">
+					<h2>
+						{{pSubscriber.numContract}} / {{pSubscriber.lsProm}}
+					</h2>
+					<p>{{pSubscriber.nameProm}}</p>
+					<p>{{pSubscriber.addressProm}} : {{pSubscriber.dateUpdate}}</p>
+				</ion-label>
+				<div slot="end" class="is-list-colored-button-group">
+					<h3>{{pSubscriber.dolg |number:'0.1-2'}}</h3>
+				</div>
+			</ion-item>
+		</div>
+	</ion-list>
+	
+	<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
 </ion-content>

@@ -1,10 +1,11 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>Edit user {{userProps.email}}</ion-title>
-		<ion-buttons slot="end">
-			<ion-button (click)="dismissModal()">Close</ion-button>
+		<ion-title>{{userProps.email}}</ion-title>
+		<ion-buttons slot="start">
+			<ion-button (click)="dismissModal()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
 		</ion-buttons>
-	
 	</ion-toolbar>
 </ion-header>
 
