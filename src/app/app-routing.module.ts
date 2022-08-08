@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'metering-point-details',
     loadChildren: () => import('./pages/metering-point-details/metering-point-details.module').then( m => m.MeteringPointDetailsPageModule)
   },
+  {
+    path: 'metering-point-history',
+    loadChildren: () => import('./pages/metering-point-history/metering-point-history.module').then( m => m.MeteringPointHistoryPageModule)
+  },
+  {
+    path: 'meter-readings',
+    loadChildren: () => import('./pages/meter-readings/meter-readings.module').then( m => m.MeterReadingsPageModule)
+  },
 
 
 
