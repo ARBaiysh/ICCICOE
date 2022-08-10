@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
@@ -10,13 +10,10 @@ const routes: Routes = [
   {
     path: 'metering-point-list',
     loadChildren: () => import('./pages/metering-point-list/metering-point-list.module').then(m => m.MeteringPointListPageModule)
-  },  {
-    path: 'metering-point-details',
-    loadChildren: () => import('./pages/metering-point-details/metering-point-details.module').then( m => m.MeteringPointDetailsPageModule)
   },
   {
-    path: 'metering-point-history',
-    loadChildren: () => import('./pages/metering-point-history/metering-point-history.module').then( m => m.MeteringPointHistoryPageModule)
+    path: 'metering-point-details',
+    loadChildren: () => import('./pages/metering-point-details/metering-point-details.module').then( m => m.MeteringPointDetailsPageModule)
   },
   {
     path: 'meter-readings',

@@ -12,11 +12,18 @@ export const isLoggedInCRSelector = createSelector(controlReadingFeatureSelector
     (controlReadingState: ControlReadingStateInterface) => controlReadingState.isLoggedInCR
 );
 
-//getControlReading
 export const controlReadingListSelector = createSelector(controlReadingFeatureSelector,
     (controlReadingState: ControlReadingStateInterface) => controlReadingState.controlReadingList
 );
-//createControlReading
+
+export const isSubmittingCreateCRSelector = createSelector(controlReadingFeatureSelector,
+    (controlReadingState: ControlReadingStateInterface) => controlReadingState.isSubmittingCreateCR
+);
+
+export const isLoggedInCreateCRCRSelector = createSelector(controlReadingFeatureSelector,
+    (controlReadingState: ControlReadingStateInterface) => controlReadingState.isLoggedInCreateCR
+);
+
 export const messageResponseSelector = createSelector(controlReadingFeatureSelector,
     (controlReadingState: ControlReadingStateInterface) => controlReadingState.messageResponse
 );

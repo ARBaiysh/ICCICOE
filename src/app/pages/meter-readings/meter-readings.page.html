@@ -1,101 +1,53 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="dismissModal()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>{{meteringPointProps.namePU}}</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="dismissModal()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>{{meteringPointProps.namePU}}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form">
-    <ion-list class="ion-padding-bottom">
-      <ion-item>
-        <ion-label color="primary" position="stacked">Новое показание</ion-label>
-        <ion-input formControlName="meterRiding" type="text" placeholder="новое показание"></ion-input>
-      </ion-item>
-    </ion-list>
-  
-      <ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
-        <ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmittingCR$ | async)" (click)="onSubmit()">
-          <ion-label>Sign Up</ion-label>
-          <ng-container *ngIf="isSubmittingCR$|async">
-            <span>Please wait...</span>
-          </ng-container>
-        </ion-item>
-      </ion-list>
-  </form>
-  
-  
-  <div class="ion-margin is-profile-picture">
-    <img src="assets/imgs/profile.png" alt="">
-    <div>
-      <ion-fab slot="fixed">
-        <ion-fab-button  size="small">
-          <ion-icon name="camera"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    </div>
-  </div>
-
-  <div class="ion-text-center ion-margin-bottom">
-    <h2 class="ion-no-margin">William Roberson</h2>
-    <p class="ion-no-margin">+99893 000 00 00</p>
-  </div>
-
-  <ion-list mode="md">
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-primary">
-        <ion-icon name="notifications"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Notification</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-secondary">
-        <ion-icon name="people"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Friends</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-dark">
-        <ion-icon name="camera"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Photos & Camera</h2>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ion-list mode="md">
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-danger">
-        <ion-icon name="alert-circle"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Report a Problem</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-success">
-        <ion-icon name="help-buoy"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Help</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item button>
-      <ion-avatar slot="start" class="is-icon-avatar is-background-light">
-        <ion-icon name="document"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Terms and Conditions</h2>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+	<ng-container *ngIf="showForm">
+		<form [formGroup]="form">
+			<ion-list class="ion-padding-bottom">
+				<ion-item>
+					<ion-label color="primary" position="stacked">Новое контрольное показание</ion-label>
+					<ion-input formControlName="meterRiding" type="text"></ion-input>
+				</ion-item>
+			</ion-list>
+			
+			<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+				<ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmittingCR$ | async)" (click)="onSubmit()">
+					<ion-label>Контрольное показание</ion-label>
+				</ion-item>
+			</ion-list>
+		</form>
+	</ng-container>
+	
+	<ng-container *ngIf="isLoggedInCreateCR$|async">
+		<ion-item color="success">
+			<h5>{{(messageResponse$|async).message}}</h5>
+		</ion-item>
+	</ng-container>
+	
+	<ng-container *ngIf="isLoggedInCR$|async">
+		<ion-list *ngFor="let controlReading of controlReadingList$|async">
+			<ion-item>
+				<ion-thumbnail slot="start">
+					<img src="assets/imgs/thumbnail-totoro.png" alt="">
+				</ion-thumbnail>
+				<ion-label>
+					<p>последнея показание: {{controlReading.meterRiding}}</p>
+					<p>пользователь: {{controlReading.userName}}</p>
+					<p>дата обновление: {{controlReading.createdDate}}</p>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+	</ng-container>
 </ion-content>
+
+
+

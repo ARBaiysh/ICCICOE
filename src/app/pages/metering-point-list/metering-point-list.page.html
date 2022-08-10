@@ -5,7 +5,7 @@
 				<ion-icon name="arrow-back-outline"></ion-icon>
 			</ion-button>
 		</ion-buttons>
-		<ion-title>Контракт № {{pSubscriberProps.numContract}}</ion-title>
+		<ion-title>{{base1cProps.name}} № {{pSubscriberProps.numContract}}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -71,7 +71,9 @@
 					<h2>{{meteringPoint.nameAbon| uppercase}}</h2>
 				</ion-label>
 				<div slot="end">
-					<h2 class="ion-no-margin">{{meteringPoint.tu}}</h2>
+					<p>{{meteringPoint.tu}}
+						<ion-icon name="chevron-forward"></ion-icon>
+					</p>
 				</div>
 			</ion-item>
 		</ion-list>

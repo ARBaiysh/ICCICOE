@@ -1,24 +1,18 @@
 import {Action, createReducer, on} from '@ngrx/store';
 import {ControlReadingStateInterface} from '../types/controlReadingState.interface';
-import {
-    getControlReadingListAction,
-    getControlReadingListFailureAction,
-    getControlReadingListSuccessAction
-} from './actions/getControlReadingList.action';
+import {getControlReadingListAction, getControlReadingListFailureAction, getControlReadingListSuccessAction} from './actions/getControlReadingList.action';
 
-import {
-    createControlReadingAction,
-    createControlReadingFailureAction,
-    createControlReadingSuccessAction
-} from './actions/createControlReading.action';
+import {createControlReadingAction, createControlReadingFailureAction, createControlReadingSuccessAction} from './actions/createControlReading.action';
 
 
 const initialStateCR: ControlReadingStateInterface = {
+    isSubmittingCreateCR: false,
+    isLoggedInCreateCR: null,
+    messageResponse: null,
+
     isSubmittingCR: false,
     isLoggedInCR: null,
-
     controlReadingList: null,
-    messageResponse: null,
 };
 
 const controlReadingReducer = createReducer(
@@ -26,22 +20,22 @@ const controlReadingReducer = createReducer(
 //createControlReading-----------------------------------------------------
     on(createControlReadingAction, (state): ControlReadingStateInterface => ({
             ...state,
-            isSubmittingCR: true,
-            isLoggedInCR: null,
+            isSubmittingCreateCR: true,
+            isLoggedInCreateCR: null,
             messageResponse: null,
         })
     ),
     on(createControlReadingSuccessAction, (state, action): ControlReadingStateInterface => ({
             ...state,
-            isSubmittingCR: false,
-            isLoggedInCR: true,
+            isSubmittingCreateCR: false,
+            isLoggedInCreateCR: true,
             messageResponse: action.messageResponse,
         })
     ),
     on(createControlReadingFailureAction, (state): ControlReadingStateInterface => ({
             ...state,
-            isSubmittingCR: false,
-            isLoggedInCR: false,
+            isSubmittingCreateCR: false,
+            isLoggedInCreateCR: false,
             messageResponse: null,
         })
     ),

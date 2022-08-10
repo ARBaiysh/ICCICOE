@@ -9,6 +9,7 @@ import {
     createControlReadingSuccessAction
 } from '../actions/createControlReading.action';
 import {MessageResponseInterface} from '../../types/messageResponse.interface';
+import {Router} from '@angular/router';
 
 
 @Injectable()
@@ -22,6 +23,6 @@ export class CreateControlReadingEffect {
         )
     );
 
-    constructor(private actions$: Actions, private metringPointService: MetringPointService) {
+    constructor(private actions$: Actions, private metringPointService: MetringPointService, private router: Router) {
     }
 }

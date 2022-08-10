@@ -60,6 +60,12 @@
 		</ion-item>
 
 	</ion-list>
+	
+	<ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+		<ion-item color="primary" button detail="true" type="submit" (click)="presentMeterReadingsPage(meteringPointProps)">
+			<ion-label>История показание</ion-label>
+		</ion-item>
+	</ion-list>
 
 	<ion-grid class="is-grid is-grid-tiles is-grid-bordered ion-no-padding">
 		<ion-row >
@@ -126,63 +132,5 @@
 
 		</ion-row>
 	</ion-grid>
-
-	<!--	<ion-list>-->
-	<!--		<ion-list-header>-->
-	<!--			<ion-label>Content</ion-label>-->
-	<!--		</ion-list-header>-->
-	<!--		<ion-item>-->
-	<!--			<ion-thumbnail slot="start">-->
-	<!--				<img src="assets/imgs/album3.png">-->
-	<!--			</ion-thumbnail>-->
-	<!--			<ion-label>-->
-	<!--				<h2>Products List</h2>-->
-	<!--				<p>-->
-	<!--					All the products you will ever need by Dell.-->
-	<!--				</p>-->
-	<!--			</ion-label>-->
-	<!--			<span slot="end">-->
-	<!--        <ion-button size="small" fill="clear" slot="start">-->
-	<!--          <ion-icon name="download"></ion-icon>-->
-	<!--        </ion-button>-->
-	<!--      </span>-->
-	<!--		</ion-item>-->
-	<!--		<ion-item>-->
-	<!--			<ion-thumbnail slot="start">-->
-	<!--				<img src="assets/imgs/album6.png">-->
-	<!--			</ion-thumbnail>-->
-	<!--			<ion-label>-->
-	<!--				<h2>Appendix</h2>-->
-	<!--				<p>-->
-	<!--					A necessary catalog for our products.-->
-	<!--				</p>-->
-	<!--			</ion-label>-->
-	<!--			<span slot="end">-->
-	<!--        <ion-button size="small" fill="clear" slot="start">-->
-	<!--          <ion-icon name="download"></ion-icon>-->
-	<!--        </ion-button>-->
-	<!--      </span>-->
-	<!--		</ion-item>-->
-	<!--	</ion-list>-->
-
-	<div class="ion-padding-horizontal">
-		<ion-grid class="is-grid ion-no-padding">
-			<ion-row>
-				<ion-col size="6" class="ion-text-center">
-
-					<ion-button expand="block" fill="outline" (click)="presentMeteringPointHistoryPage(meteringPointProps)">
-						<ion-icon name="layers-sharp" slot="start"></ion-icon>
-						История
-					</ion-button>
-				</ion-col>
-				<ion-col size="6" class="ion-text-center">
-					<ion-button expand="block" fill="outline" (click)="presentMeterReadingsPage(meteringPointProps)">
-						<ion-icon name="scale-sharp" slot="start"></ion-icon>
-						Показание
-					</ion-button>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
-	</div>
 </ion-content>
 

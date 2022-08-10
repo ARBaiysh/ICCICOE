@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, Optional} from '@angular/core';
 import {IonRouterOutlet, ModalController, NavController, Platform} from '@ionic/angular';
 import {MeteringPointEntityInterface} from '../../base1c/types/meteringPointEntityInterface';
-import {MeteringPointHistoryPage} from '../metering-point-history/metering-point-history.page';
 import {MeterReadingsPage} from '../meter-readings/meter-readings.page';
 import {Base1cInterface} from '../../users/types/base1cInterface';
 
@@ -21,7 +20,7 @@ export class MeteringPointDetailsPage implements OnInit {
                 @Optional() private routerOutlet: IonRouterOutlet,
                 private navCtrl: NavController,
                 private modalController: ModalController
-    )  {
+    ) {
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.dismissModal();
         });
@@ -29,14 +28,6 @@ export class MeteringPointDetailsPage implements OnInit {
 
     dismissModal() {
         this.modalController.dismiss({dismissed: true});
-    }
-
-    async presentMeteringPointHistoryPage(meteringPoint: MeteringPointEntityInterface) {
-        const modal = await this.modalController.create({
-            component: MeteringPointHistoryPage,
-            componentProps: {meteringPointProps: meteringPoint}
-        });
-        return await modal.present();
     }
 
     async presentMeterReadingsPage(meteringPoint: MeteringPointEntityInterface) {
