@@ -1,9 +1,11 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
+			<ion-button (click)="dismissModal()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
 		</ion-buttons>
-		<ion-title slot="start">{{base1c?.name}}</ion-title>
+		<ion-title slot="start">{{base1cProps?.name}}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -17,7 +19,7 @@
 	<ion-list *ngIf="(pSubscriberList$|async).length > 0" lines="full" class="is-list-colored">
 		<div *ngFor="let pSubscriber of pSubscriberList$|async; let i = index">
 			<ion-item [ngClass]="pSubscriber.dolg <= 0 ? 'is-item-category-success' : 'is-item-category-danger'" (click)="itemTapped(i)">
-				<ion-label [routerLink]="['/metering-point-list']" (click)="setPSubscriber(pSubscriber)">
+				<ion-label (click)="presentMeteringPointListPage(pSubscriber)">
 					<h2>
 						{{pSubscriber.numContract}} / {{pSubscriber.lsProm}}
 					</h2>

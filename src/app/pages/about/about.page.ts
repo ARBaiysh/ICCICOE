@@ -3,11 +3,11 @@ import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {UserInterface} from '../../users/types/userInterface';
 import {currentUserSelector, isLoggedInCurrentUserSelector, isSubmittingCurrentUserSelector} from '../../users/store/selectors';
-import {Base1cService} from '../../base1c/service/base1c.service';
 import {Base1cInterface} from '../../users/types/base1cInterface';
-import {AlertController, IonRouterOutlet, Platform} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, ModalController, Platform} from '@ionic/angular';
 import {Location} from '@angular/common';
 import {App} from '@capacitor/app';
+import {PSubscriberPage} from '../p-subscriber/p-subscriber.page';
 
 @Component({
     selector: 'app-about',
@@ -23,10 +23,10 @@ export class AboutPage implements OnInit {
     currentUser$: Observable<UserInterface | null>;
 
     constructor(private store: Store,
-                private base1cService: Base1cService,
                 private platform: Platform,
                 private alertController: AlertController,
-                private location: Location
+                private location: Location,
+                private modalController: ModalController
     ) {
         platform.ready().then(() => {
             this.backButtonEvent();
@@ -37,8 +37,12 @@ export class AboutPage implements OnInit {
         this.initializeValues();
     }
 
-    setBase1c(base1c: Base1cInterface): void {
-        this.base1cService.setBase1c(base1c);
+    async presentPSubscriberPage(base1c: Base1cInterface){
+        const modal = await this.modalController.create({
+            component: PSubscriberPage,
+            componentProps: {base1cProps: base1c}
+        });
+        return await modal.present();
     }
 
 

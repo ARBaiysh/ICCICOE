@@ -1,19 +1,21 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>лс {{meteringPoint.lsProm}} {{meteringPoint.tu}}</ion-title>
 		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
+			<ion-button (click)="dismissModal()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
 		</ion-buttons>
+		<ion-title>лс {{meteringPointProps.lsProm}} {{meteringPointProps.tu}}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 
 <ion-content>
 	<div class="ion-padding-horizontal">
-		<h2>{{meteringPoint.nameAbon|uppercase}}</h2>
+		<h2>{{meteringPointProps.nameAbon|uppercase}}</h2>
 		<p>
 			<ion-icon name="calendar"></ion-icon>
-			Дата обновление: {{meteringPoint.dateUpdate}}
+			Дата обновление: {{meteringPointProps.dateUpdate}}
 		</p>
 	</div>
 
@@ -22,39 +24,39 @@
 			<ion-label>
 				<h2>Адрес:</h2>
 			</ion-label>
-			<span class="is-event-details-span" slot="end">{{meteringPoint.addressAbon}}</span>
+			<span class="is-event-details-span" slot="end">{{meteringPointProps.addressAbon}}</span>
 		</ion-item>
 
 		<ion-item>
 			<ion-label>
 				<h2>Телефон:</h2>
 			</ion-label>
-			<span class="is-event-details-span" slot="end">{{meteringPoint.telAbon}}</span>
+			<span class="is-event-details-span" slot="end">{{meteringPointProps.telAbon}}</span>
 		</ion-item>
 
 		<ion-item>
 			<ion-label>
 				<h2>Тариф:</h2>
 			</ion-label>
-			<span class="is-event-details-span" slot="end">{{meteringPoint.tarif}}</span>
+			<span class="is-event-details-span" slot="end">{{meteringPointProps.tarif}}</span>
 		</ion-item>
 
 		<ion-item>
 			<ion-label>
 				<h2>ТУ:</h2>
 			</ion-label>
-			<span class="is-event-details-span" slot="end">{{meteringPoint.tu}}</span>
+			<span class="is-event-details-span" slot="end">{{meteringPointProps.tu}}</span>
 		</ion-item>
 
 		<ion-item>
 			<ion-label>
 				<h2>Мощность:</h2>
 			</ion-label>
-			<span class="is-event-details-span" slot="end">{{meteringPoint.power}} кВт</span>
+			<span class="is-event-details-span" slot="end">{{meteringPointProps.power}} кВт</span>
 		</ion-item>
 
 		<ion-item>
-			<p class="is-event-details-span" slot="start">{{meteringPoint.tp}}</p>
+			<p class="is-event-details-span" slot="start">{{meteringPointProps.tp}}</p>
 		</ion-item>
 
 	</ion-list>
@@ -64,31 +66,31 @@
 			<ion-col size="6">
 
 				<ion-row>
-					<h3>Тип ПУ <span class="is-color-primary">{{meteringPoint.namePU}}</span></h3>
+					<h3>Тип ПУ <span class="is-color-primary">{{meteringPointProps.namePU}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Ампер<span class=" is-color-primary">{{meteringPoint.ampere}}</span></h3>
+					<h3>Ампер<span class=" is-color-primary">{{meteringPointProps.ampere}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Коэф T/T<span class=" is-color-primary">{{meteringPoint.coeffTT}}</span></h3>
+					<h3>Коэф T/T<span class=" is-color-primary">{{meteringPointProps.coeffTT}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Гос.пломба<span class=" is-color-success">{{meteringPoint.gosPlomb === '' ? 'нет пломбы' : meteringPoint.gosPlomb}}</span></h3>
+					<h3>Гос.пломба<span class=" is-color-success">{{meteringPointProps.gosPlomb === '' ? 'нет пломбы' : meteringPointProps.gosPlomb}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Пломба на крышке<span class=" is-color-success">{{meteringPoint.lidPlomb === '' ? 'нет пломбы' : meteringPoint.lidPlomb}}</span></h3>
+					<h3>Пломба на крышке<span class=" is-color-success">{{meteringPointProps.lidPlomb === '' ? 'нет пломбы' : meteringPointProps.lidPlomb}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Пломба ТТ<span class=" is-color-success">{{meteringPoint.ttPlomb === '' ? 'нет пломбы' : meteringPoint.ttPlomb}}</span></h3>
+					<h3>Пломба ТТ<span class=" is-color-success">{{meteringPointProps.ttPlomb === '' ? 'нет пломбы' : meteringPointProps.ttPlomb}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Пломба РТН<span class=" is-color-success">{{meteringPoint.rtnPlomb === '' ? 'нет пломбы' : meteringPoint.rtnPlomb}}</span></h3>
+					<h3>Пломба РТН<span class=" is-color-success">{{meteringPointProps.rtnPlomb === '' ? 'нет пломбы' : meteringPointProps.rtnPlomb}}</span></h3>
 				</ion-row>
 
 			</ion-col>
@@ -96,28 +98,28 @@
 			<ion-col size="6">
 
 				<ion-row>
-					<h3>№ <span class=" is-color-primary ">{{meteringPoint.numPU}}</span></h3>
+					<h3>№ <span class=" is-color-primary ">{{meteringPointProps.numPU}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Расположение ПУ<span class="is-color-primary">{{meteringPoint.locationPU}}</span></h3>
+					<h3>Расположение ПУ<span class="is-color-primary">{{meteringPointProps.locationPU}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>Последнее показание<span class=" is-color-primary">{{meteringPoint.meterReading}}</span></h3>
+					<h3>Последнее показание<span class=" is-color-primary">{{meteringPointProps.meterReading}}</span></h3>
 				</ion-row>
 
 				<ion-row>
-					<h3>ОРП<span class=" is-color-success">{{meteringPoint.disposablePlomb === '' ? 'нет пломбы' : meteringPoint.disposablePlomb}}</span></h3>
+					<h3>ОРП<span class=" is-color-success">{{meteringPointProps.disposablePlomb === '' ? 'нет пломбы' : meteringPointProps.disposablePlomb}}</span></h3>
 				</ion-row>
 				<ion-row>
-					<h3>Пломба щие ТТ<span class=" is-color-success">{{meteringPoint.shieldTTPlomb === '' ? 'нет пломбы' : meteringPoint.shieldTTPlomb}}</span></h3>
+					<h3>Пломба щие ТТ<span class=" is-color-success">{{meteringPointProps.shieldTTPlomb === '' ? 'нет пломбы' : meteringPointProps.shieldTTPlomb}}</span></h3>
 				</ion-row>
 				<ion-row>
-					<h3>Пломба щие ТН<span class=" is-color-success">{{meteringPoint.shieldTNPlomb === '' ? 'нет пломбы' : meteringPoint.shieldTNPlomb}}</span></h3>
+					<h3>Пломба щие ТН<span class=" is-color-success">{{meteringPointProps.shieldTNPlomb === '' ? 'нет пломбы' : meteringPointProps.shieldTNPlomb}}</span></h3>
 				</ion-row>
 				<ion-row>
-					<h3>Пломба АВ ТН<span class=" is-color-success">{{meteringPoint.abtnPlomb === '' ? 'нет пломбы' : meteringPoint.abtnPlomb}}</span></h3>
+					<h3>Пломба АВ ТН<span class=" is-color-success">{{meteringPointProps.abtnPlomb === '' ? 'нет пломбы' : meteringPointProps.abtnPlomb}}</span></h3>
 				</ion-row>
 
 			</ion-col>
@@ -168,13 +170,13 @@
 			<ion-row>
 				<ion-col size="6" class="ion-text-center">
 
-					<ion-button expand="block" fill="outline" (click)="presentModalMeteringPointHistory(meteringPoint)">
+					<ion-button expand="block" fill="outline" (click)="presentMeteringPointHistoryPage(meteringPointProps)">
 						<ion-icon name="layers-sharp" slot="start"></ion-icon>
 						История
 					</ion-button>
 				</ion-col>
 				<ion-col size="6" class="ion-text-center">
-					<ion-button expand="block" fill="outline" (click)="presentModalMeterReadings(meteringPoint)">
+					<ion-button expand="block" fill="outline" (click)="presentMeterReadingsPage(meteringPointProps)">
 						<ion-icon name="scale-sharp" slot="start"></ion-icon>
 						Показание
 					</ion-button>

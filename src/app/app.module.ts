@@ -17,6 +17,8 @@ import {PersistenceService} from './auth/services/persistance.service';
 import {AuthModule} from './auth/auth.module';
 import {UsersModule} from './users/users.module';
 import {Base1cModule} from './base1c/base1c.module';
+import {ControlReadingModule} from './controlReading/controlReading.module';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import {Base1cModule} from './base1c/base1c.module';
         }),
         AuthModule,
         UsersModule,
-        Base1cModule
+        Base1cModule,
+        ControlReadingModule
     ],
     providers: [PersistenceService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},

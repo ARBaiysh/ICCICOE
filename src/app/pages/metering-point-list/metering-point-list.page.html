@@ -1,9 +1,11 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>Контракт № {{pSubscriber.numContract}}</ion-title>
 		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
+			<ion-button (click)="dismissModal()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
 		</ion-buttons>
+		<ion-title>Контракт № {{pSubscriberProps.numContract}}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -14,7 +16,7 @@
 			<ion-col size="9" class="is-tile">
 				<h3>
 					<span>Наименование</span>
-					<h5>{{pSubscriber.nameProm}}</h5>
+					<h5>{{pSubscriberProps.nameProm}}</h5>
 				</h3>
 			</ion-col>
 			<ion-col size="3" class="is-tile">
@@ -29,14 +31,14 @@
 			<ion-col class="is-tile">
 				<h3>
 					<span>Лс для оплаты</span>
-					<h5>{{pSubscriber.lsProm}}</h5>
+					<h5>{{pSubscriberProps.lsProm}}</h5>
 				</h3>
 			</ion-col>
 			<ion-col size="7" class="is-tile">
 				<h3>
-					<span class="ion-padding-end">Сальдо на {{pSubscriber.dateUpdate}}</span>
-					<h5 slot="end" [ngClass]="pSubscriber.dolg <= 0 ? 'ion-padding-end colored is-color-success' : 'ion-padding-end colored is-color-danger'">
-						{{pSubscriber.dolg}} сом</h5>
+					<span class="ion-padding-end">Сальдо на {{pSubscriberProps.dateUpdate}}</span>
+					<h5 slot="end" [ngClass]="pSubscriberProps.dolg <= 0 ? 'ion-padding-end colored is-color-success' : 'ion-padding-end colored is-color-danger'">
+						{{pSubscriberProps.dolg}} сом</h5>
 				</h3>
 			</ion-col>
 		</ion-row>
@@ -44,7 +46,7 @@
 			<ion-col size="12" class="is-tile">
 				<h3>
 					<span>Адрес</span>
-					<h5>{{pSubscriber.addressProm}}</h5>
+					<h5>{{pSubscriberProps.addressProm}}</h5>
 				</h3>
 			</ion-col>
 		</ion-row>
@@ -64,7 +66,7 @@
 			<ion-searchbar placeholder="Search..." [(ngModel)]="searchTerm" show-cancel-button="focus"></ion-searchbar>
 		</div>
 		<ion-list class="is-list-colored" *ngFor="let meteringPoint of (pSubscriber$|async)?.meteringPoints | filter:searchTerm">
-			<ion-item [ngClass]="meteringPointColorTU(meteringPoint.tu)" [routerLink]="['/metering-point-details']" (click)="setMeteringPoint(meteringPoint)">
+			<ion-item [ngClass]="meteringPointColorTU(meteringPoint.tu)" (click)="presentMeteringPointDetailsPage(meteringPoint)">
 				<ion-label>
 					<h2>{{meteringPoint.nameAbon| uppercase}}</h2>
 				</ion-label>

@@ -5,44 +5,13 @@ import {Base1cInterface} from '../../users/types/base1cInterface';
 import {environment} from '../../../environments/environment';
 import {PSubscriberInterface} from '../types/pSubscriber.interface';
 import {PSubscriberEntityInterface} from '../types/pSubscriberEntity.interface';
-import {MeteringPointListPageModule} from '../../pages/metering-point-list/metering-point-list.module';
-import {MeteringPointEntityInterface} from '../types/meteringPointEntityInterface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class Base1cService {
 
-    private base1c: Base1cInterface;
-    private pSubscriber: PSubscriberInterface;
-    private meteringPoint: MeteringPointEntityInterface;
-
     constructor(private http: HttpClient) {
-    }
-
-
-    getMeteringPoint(): MeteringPointEntityInterface {
-        return this.meteringPoint;
-    }
-
-    setMeteringPoint(value: MeteringPointEntityInterface) {
-        this.meteringPoint = value;
-    }
-
-    getPSubscriber(): PSubscriberInterface {
-        return this.pSubscriber;
-    }
-
-    setPSubscriber(pSubscriber: PSubscriberInterface): void {
-        this.pSubscriber = pSubscriber;
-    }
-
-    setBase1c(base1c: Base1cInterface): void {
-        this.base1c = base1c;
-    }
-
-    getBase1c(): Base1cInterface {
-        return this.base1c;
     }
 
     getAllBase1c(): Observable<Base1cInterface[]> {
@@ -64,6 +33,4 @@ export class Base1cService {
         const url = environment.apiUrl + '/PSub/' + lsProm;
         return this.http.get<PSubscriberEntityInterface>(url);
     }
-
-
 }

@@ -10,11 +10,30 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="form">
+    <ion-list class="ion-padding-bottom">
+      <ion-item>
+        <ion-label color="primary" position="stacked">Новое показание</ion-label>
+        <ion-input formControlName="meterRiding" type="text" placeholder="новое показание"></ion-input>
+      </ion-item>
+    </ion-list>
+  
+      <ion-list lines="none" class="is-list-buttons is-list-transparent ion-padding ion-no-margin">
+        <ion-item color="primary" button detail="true" type="submit" [disabled]="form.invalid || (isSubmittingCR$ | async)" (click)="onSubmit()">
+          <ion-label>Sign Up</ion-label>
+          <ng-container *ngIf="isSubmittingCR$|async">
+            <span>Please wait...</span>
+          </ng-container>
+        </ion-item>
+      </ion-list>
+  </form>
+  
+  
   <div class="ion-margin is-profile-picture">
-    <img src="assets/imgs/profile.png">
+    <img src="assets/imgs/profile.png" alt="">
     <div>
       <ion-fab slot="fixed">
-        <ion-fab-button fill="outline" size="small">
+        <ion-fab-button  size="small">
           <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
       </ion-fab>
