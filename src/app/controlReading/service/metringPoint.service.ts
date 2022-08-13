@@ -10,7 +10,18 @@ import {MessageResponseInterface} from '../types/messageResponse.interface';
     providedIn: 'root'
 })
 export class MetringPointService {
+    private lsMeteringPoint: string;
+
+
     constructor(private http: HttpClient) {
+    }
+
+    getLsMeteringPoint(): string {
+        return this.lsMeteringPoint;
+    }
+
+    setLsMeteringPoint(value: string) {
+        this.lsMeteringPoint = value;
     }
 
     createControlReading(controlReadingRequest: ControlReadingRequestInterface): Observable<MessageResponseInterface> {

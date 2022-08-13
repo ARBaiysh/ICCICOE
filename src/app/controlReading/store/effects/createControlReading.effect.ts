@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {MetringPointService} from '../../service/metringPoint.service';
-import {
-    createControlReadingAction,
-    createControlReadingFailureAction,
-    createControlReadingSuccessAction
-} from '../actions/createControlReading.action';
+import {createControlReadingAction, createControlReadingFailureAction, createControlReadingSuccessAction} from '../actions/createControlReading.action';
 import {MessageResponseInterface} from '../../types/messageResponse.interface';
-import {Router} from '@angular/router';
+import {getCurrentUserFailureAction} from '../../../users/store/actions/getCurrentUser.action';
+import {Store} from '@ngrx/store';
+import {getControlReadingListAction} from '../actions/getControlReadingList.action';
 
 
 @Injectable()
@@ -22,7 +20,15 @@ export class CreateControlReadingEffect {
             ))
         )
     );
+    logout$ = createEffect(() => this.actions$.pipe(
+            ofType(createControlReadingSuccessAction),
+            tap(() => {
+                this.store.dispatch(getControlReadingListAction({lsMeteringPoint: this.metringPointService.getLsMeteringPoint()}));
+            })
+        ),
+        {dispatch: false}
+    );
 
-    constructor(private actions$: Actions, private metringPointService: MetringPointService, private router: Router) {
+    constructor(private actions$: Actions, private metringPointService: MetringPointService, private store: Store) {
     }
 }

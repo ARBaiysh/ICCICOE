@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModalController, Platform} from '@ionic/angular';
+import {AlertController, ModalController, Platform} from '@ionic/angular';
 import {MeteringPointEntityInterface} from '../../base1c/types/meteringPointEntityInterface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
@@ -17,6 +17,7 @@ import {createControlReadingAction} from '../../controlReading/store/actions/cre
 import {Base1cInterface} from '../../users/types/base1cInterface';
 import {ControlReadingInterface} from '../../controlReading/types/controlReading.interface';
 import {getControlReadingListAction} from '../../controlReading/store/actions/getControlReadingList.action';
+import {MetringPointService} from '../../controlReading/service/metringPoint.service';
 
 @Component({
     selector: 'app-meter-readings',
@@ -29,6 +30,8 @@ export class MeterReadingsPage implements OnInit {
     form: FormGroup;
     showForm: boolean;
 
+    lsMeteringPoint: string;
+
     isSubmittingCR$: Observable<boolean>;
     isLoggedInCR$: Observable<boolean | null>;
     controlReadingList$: Observable<ControlReadingInterface[] | null>;
@@ -40,7 +43,9 @@ export class MeterReadingsPage implements OnInit {
     constructor(private fb: FormBuilder,
                 private modalController: ModalController,
                 private platform: Platform,
-                private store: Store
+                private store: Store,
+                private metringPointService: MetringPointService,
+                private alertController: AlertController
     ) {
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.dismissModal();
@@ -66,8 +71,8 @@ export class MeterReadingsPage implements OnInit {
     }
 
     initializeValues(): void {
-        const lsMeteringPoint = this.meteringPointProps.lsAbon;
-        this.store.dispatch(getControlReadingListAction({lsMeteringPoint}));
+        this.lsMeteringPoint = this.meteringPointProps.lsAbon;
+        this.store.dispatch(getControlReadingListAction({lsMeteringPoint: this.lsMeteringPoint}));
 
         this.isSubmittingCR$ = this.store.pipe(select(isSubmittingSRSelector));
         this.isLoggedInCR$ = this.store.pipe(select(isLoggedInCRSelector));
@@ -78,9 +83,24 @@ export class MeterReadingsPage implements OnInit {
         this.messageResponse$ = this.store.pipe(select(messageResponseSelector));
     }
 
-    onSubmit(): void {
+    async onSubmit() {
         const controlReadingRequest: ControlReadingRequestInterface = this.form.value;
         this.store.dispatch(createControlReadingAction({controlReadingRequest}));
+        this.metringPointService.setLsMeteringPoint(this.lsMeteringPoint);
         this.showForm = false;
+        const alert = await this.alertController.create({
+            message: 'Контрольное показание занесено',
+            buttons: ['OK'],
+        });
+
+        await alert.present();
+    }
+
+    massageResponse(message: string): string {
+        if (message.includes('Контрольные показания занесены')) {
+            return 'success';
+        } else {
+            return 'warning';
+        }
     }
 }

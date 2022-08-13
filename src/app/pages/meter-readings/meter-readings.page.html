@@ -10,10 +10,12 @@
 </ion-header>
 
 <ion-content>
-	<ng-container *ngIf="showForm">
-		<form [formGroup]="form">
+	<ng-container>
+		<ion-progress-bar *ngIf="isSubmittingCreateCR$|async" type="indeterminate" color="primary"></ion-progress-bar>
+		<form *ngIf="showForm" [formGroup]="form">
 			<ion-list class="ion-padding-bottom">
 				<ion-item>
+					<p>{{meteringPointProps.meterReading}} от {{meteringPointProps.lastDateReading}}</p>
 					<ion-label color="primary" position="stacked">Новое контрольное показание</ion-label>
 					<ion-input formControlName="meterRiding" type="text"></ion-input>
 				</ion-item>
@@ -27,17 +29,18 @@
 		</form>
 	</ng-container>
 	
-	<ng-container *ngIf="isLoggedInCreateCR$|async">
-		<ion-item color="success">
+	<ng-container *ngIf="!showForm">
+		<ion-item [color]="massageResponse((messageResponse$|async).message)">
 			<h5>{{(messageResponse$|async).message}}</h5>
 		</ion-item>
 	</ng-container>
 	
 	<ng-container *ngIf="isLoggedInCR$|async">
+		<ion-progress-bar *ngIf="isSubmittingCR$|async" type="indeterminate" color="primary" reversed="true"></ion-progress-bar>
 		<ion-list *ngFor="let controlReading of controlReadingList$|async">
 			<ion-item>
 				<ion-thumbnail slot="start">
-					<img src="assets/imgs/thumbnail-totoro.png" alt="">
+					<img src="assets/imgs/pu3.png" alt="">
 				</ion-thumbnail>
 				<ion-label>
 					<p>последнея показание: {{controlReading.meterRiding}}</p>

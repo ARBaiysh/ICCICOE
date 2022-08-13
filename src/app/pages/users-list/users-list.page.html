@@ -6,8 +6,10 @@
 				<ion-icon name="menu" size="large"></ion-icon>
 			</ion-menu-toggle>
 		</ion-buttons>
-		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
+		<ion-buttons slot="end">
+			<ion-button [routerLink]="['/register']">
+				<ion-icon size="large" name="person-add-outline"></ion-icon>
+			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>

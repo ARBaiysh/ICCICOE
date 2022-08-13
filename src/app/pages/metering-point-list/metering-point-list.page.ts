@@ -40,7 +40,6 @@ export class MeteringPointListPage implements OnInit {
         this.modalController.dismiss({dismissed: true});
     }
 
-
     meteringPointColorTU(tu: string): string {
         if (tu === 'Основная') {
             return 'is-item-category-success';
@@ -71,6 +70,4 @@ export class MeteringPointListPage implements OnInit {
         this.isLoggedInGetPSubscriber$ = this.store.pipe(select(isLoggedInGetPSubscriberSelector));
         this.pSubscriber$ = this.store.pipe(select(pSubscriberSelector));
     }
-
-
 }
