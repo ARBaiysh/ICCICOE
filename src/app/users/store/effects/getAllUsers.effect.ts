@@ -9,18 +9,15 @@ import {getAllUsersAction, getAllUsersFailureAction, getAllUsersSuccessAction} f
 
 @Injectable()
 export class GetAllUsersEffect {
-  getAllUsers$ = createEffect(() => this.actions$.pipe(
-      ofType(getAllUsersAction),
-      switchMap(() => this.userService.getAllUsers().pipe(
-        map(( usersList: UserInterface[] ) => getAllUsersSuccessAction({usersList})),
-        catchError(() => of(getAllUsersFailureAction()))
-      ))
-    )
-  );
+    getAllUsers$ = createEffect(() => this.actions$.pipe(
+            ofType(getAllUsersAction),
+            switchMap(() => this.userService.getAllUsers().pipe(
+                map((usersList: UserInterface[]) => getAllUsersSuccessAction({usersList})),
+                catchError(() => of(getAllUsersFailureAction()))
+            ))
+        )
+    );
 
-  constructor(
-    private actions$: Actions,
-    private userService: UserService,
-  ) {
-  }
+    constructor(private actions$: Actions, private userService: UserService) {
+    }
 }

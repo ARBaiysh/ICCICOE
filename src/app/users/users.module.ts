@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { GetAllUsersEffect } from './store/effects/getAllUsers.effect';
 import { UpdateUsersEffect } from './store/effects/updateUsers.effect';
-import {SidenavPageModule} from '../pages/sidenav/sidenav.module';
+
 
 
 @NgModule({
